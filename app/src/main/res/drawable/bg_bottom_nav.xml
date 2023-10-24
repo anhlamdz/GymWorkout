@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt">
+    <item android:state_selected="true" android:state_pressed="true">
+        <ripple android:color="@color/white">
+            <item>
+                <shape>
+                    <corners android:radius="12.8dp"/>
+                    <stroke android:width="2.13dp" android:color="@color/black"/>
+                    <solid android:color="@color/gray_ccc"/>
+                </shape>
+            </item>
+        </ripple>
+    </item>
+    <item android:state_selected="true">
+        <shape>
+            <corners android:radius="12.8dp"/>
+            <stroke android:width="2.13dp" android:color="@color/black"/>
+            <solid android:color="@color/white"/>
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <ripple android:color="@color/white">
+            <item>
+                <shape>
+                    <stroke android:width="1.07dp" android:color="#ffffff"/>
+                    <corners android:radius="12.8dp"/>
+                    <solid android:color="@color/gray_ccc"/>
+                </shape>
+            </item>
+        </ripple>
+    </item>
+    <item>
+        <shape>
+            <stroke android:width="1.07dp" android:color="@color/gray_ccc"/>
+            <corners android:radius="12.8dp"/>
+            <solid android:color="@color/white"/>
+        </shape>
+    </item>
+</selector>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2.13dp"
+        android:layout_marginTop="10.67dp"
+        android:layout_marginEnd="2.13dp"
+        android:layout_marginBottom="8.53dp"
+        android:background="@drawable/bg_bottom_nav"
+        android:elevation="2.13dp">
+
+        <ImageView
+            android:id="@+id/ivEmoji"
+            android:layout_width="42.67dp"
+            android:layout_height="42.67dp"
+            android:layout_marginStart="16dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8.53dp"
+            android:layout_marginTop="25.6dp"
+            android:layout_marginEnd="10.67dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:maxLines="1"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="17.07dp"
+            app:autoSizeMaxTextSize="17.07dp"
+            app:autoSizeMinTextSize="10.67dp"
+            app:layout_constraintBottom_toTopOf="@+id/tvDes"
+            app:layout_constraintEnd_toStartOf="@+id/ivCheck"
+            app:layout_constraintStart_toEndOf="@+id/ivEmoji"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginBottom="25.6dp"
+            app:layout_goneMarginStart="10.67dp" />
+
+        <TextView
+            android:id="@+id/tvDes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6.4dp"
+            android:layout_marginBottom="25.6dp"
+            android:text="abc"
+            android:textColor="@color/black"
+            android:textSize="13.87dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tvContent"
+            app:layout_constraintStart_toStartOf="@+id/tvContent"
+            app:layout_constraintTop_toBottomOf="@+id/tvContent" />
+
+        <ImageView
+            android:id="@+id/ivCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_checkcircle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

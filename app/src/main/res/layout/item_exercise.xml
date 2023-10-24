@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:id="@+id/exercise_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_item_setting"
+        android:layout_marginVertical="8dp"
+        android:paddingVertical="8dp"
+        >
+        <ImageView
+            android:id="@+id/imageEx"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:scaleType="centerCrop"
+            android:layout_marginStart="15dp"
+            />
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:fontFamily="@font/montserrat_bold"
+                android:letterSpacing="0.0312"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/exercises_number_of_completion"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="Face pull"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:id="@+id/secondary_text"
+                android:textSize="14sp"
+                android:textStyle="normal"
+                android:textAllCaps="false"
+                android:fontFamily="sans-serif"
+                android:letterSpacing="0.0312"
+                android:textColor="@color/dot_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lines="1"
+                android:text="chest"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/exercises_number_of_completion"
+            style="?attr/textAppearanceBody1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="16dp"
+            android:textColor="?android:attr/textColorSecondary" />
+    </LinearLayout>
+
+</layout>

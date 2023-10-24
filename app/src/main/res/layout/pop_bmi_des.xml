@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0.8">
+
+        <View
+            android:id="@+id/viewBg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="37.33dp"
+            android:layout_marginRight="37.33dp"
+            android:layout_marginBottom="10.67dp"
+            android:background="@drawable/bg_bmi_pop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12.8dp"
+            android:layout_marginTop="8.53dp"
+            android:layout_marginRight="12.8dp"
+            android:layout_marginBottom="19.2dp"
+            android:text="@string/bmi_explain"
+            android:textColor="@color/white"
+            android:textSize="14.93sp"
+            app:layout_constraintBottom_toBottomOf="@+id/viewBg"
+            app:layout_constraintLeft_toLeftOf="@+id/viewBg"
+            app:layout_constraintRight_toRightOf="@+id/viewBg"
+            app:layout_constraintTop_toTopOf="@+id/viewBg" />
+
+        <View
+            android:id="@+id/indicator"
+            android:layout_width="10.67dp"
+            android:layout_height="10.67dp"
+            android:layout_marginLeft="108.8dp"
+            android:background="@drawable/bg_inverted_triangle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
