@@ -13,7 +13,6 @@ import android.view.Window
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
@@ -73,7 +72,7 @@ class StartTrainingAdapter : ListAdapter<ExerciseRepXSetEntity, StartTrainingAda
 				binding.toDoRvc.layoutManager = LinearLayoutManager(itemView.context)
 				binding.toDoRvc.adapter = adapter
 
-				openToDoRcv(position)
+				openToDoRcv(0)
 			}
 			binding.imageEx.setOnClickListener {
 				dialogExerciseDetail(exerciseResponse.exerciseResponse, itemView.context)
