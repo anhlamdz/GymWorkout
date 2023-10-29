@@ -7,10 +7,11 @@ import androidx.lifecycle.viewModelScope
 import io.strongapp.gymworkout.data.database.entities.ExerciseGymEntity
 import io.strongapp.gymworkout.data.repository.ExercisesRepository
 import io.strongapp.gymworkout.data.database.AppDatabase
+import io.strongapp.gymworkout.data.database.ExerciseResponse
 import kotlinx.coroutines.launch
 
 class ExercisesViewModel(application: Application) : AndroidViewModel(application) {
-
+	var exerciseList : List<ExerciseResponse>? = null
 	val exerciseGymEntity : LiveData<MutableList<ExerciseGymEntity>>
 	val exercisesRepository : ExercisesRepository
 

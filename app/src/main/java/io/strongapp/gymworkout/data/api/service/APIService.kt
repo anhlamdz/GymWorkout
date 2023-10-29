@@ -10,19 +10,10 @@ import retrofit2.http.Path
 interface APIService {
     @GET("exercises?limit=1300")
     @Headers(
-        "X-RapidAPI-Key: 3374fea9acmsh79458c3af53c3b6p16a6e8jsn812f10d704bd",
+        "X-RapidAPI-Key: da27d49a0emsh06763bfac47d3aap11af26jsn82029f2d7011",
         "X-RapidAPI-Host: exercisedb.p.rapidapi.com"
     )
     suspend fun getAllExercises(): List<ExerciseResponse>
-
-
-    @GET("exercises/name/{name}?limit=1")
-    @Headers(
-        "X-RapidAPI-Key: 3374fea9acmsh79458c3af53c3b6p16a6e8jsn812f10d704bd",
-        "X-RapidAPI-Host: exercisedb.p.rapidapi.com"
-    )
-    suspend fun getExercise(@Path("name") name : String): ExerciseResponse
-
 
     companion object {
         fun createService(retrofit: Retrofit): APIService {

@@ -1,20 +1,19 @@
-package io.strongapp.gymworkout.ui.training
+package io.strongapp.gymworkout.ui.training.trainingdetail
 
 
 import android.content.Intent
-import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.strongapp.gymworkout.R
 import io.strongapp.gymworkout.base.BaseActivity
 import io.strongapp.gymworkout.data.models.TrainingEntity
 import io.strongapp.gymworkout.databinding.ActivityTrainingDetailBinding
-import io.strongapp.gymworkout.ui.exercises.adpter.ExercisesAdapter
 import io.strongapp.gymworkout.ui.training.starttraing.StartTrainingAct
+import io.strongapp.gymworkout.ui.training.trainingdetail.adapter.TrainingDetailAdapter
 
 
 class TrainingDetailAct : BaseActivity<ActivityTrainingDetailBinding>() {
 	private lateinit var exerciseItem : TrainingEntity
-	private val exercisesAdapter by lazy(LazyThreadSafetyMode.NONE) { ExercisesAdapter() }
+	private val trainingDetailAdapter by lazy(LazyThreadSafetyMode.NONE) { TrainingDetailAdapter() }
 	override fun initView() {
 		exerciseItem = intent.getSerializableExtra("exercise") as TrainingEntity
 
@@ -23,9 +22,11 @@ class TrainingDetailAct : BaseActivity<ActivityTrainingDetailBinding>() {
 		binding.numberEx.text = exerciseItem.numberEx.toString()
 		binding.imgFocus.setImageResource(exerciseItem.imageFocus)
 
-		exercisesAdapter.submitList(exerciseItem.list)
+
+		trainingDetailAdapter.submitList(exerciseItem.list)
 		binding.rcvExercises.layoutManager = LinearLayoutManager(this)
-		binding.rcvExercises.adapter = exercisesAdapter
+		binding.rcvExercises.adapter = trainingDetailAdapter
+
 
 	}
 
@@ -40,6 +41,7 @@ class TrainingDetailAct : BaseActivity<ActivityTrainingDetailBinding>() {
 		}
 	}
 
+
 	override fun getContentView(): Int {
 		return R.layout.activity_training_detail
 	}
@@ -47,5 +49,6 @@ class TrainingDetailAct : BaseActivity<ActivityTrainingDetailBinding>() {
 	override fun bindViewModel() {
 
 	}
+
 
 }

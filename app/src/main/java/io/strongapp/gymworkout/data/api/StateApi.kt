@@ -8,7 +8,5 @@ sealed class StateApi {
 
     data class Success(val exerciseResponse: List<ExerciseResponse>) : StateApi()
 
-    data class SuccessSingle(val exerciseResponse: ExerciseResponse) : StateApi()
-
     data class Failed(val e: Exception) : StateApi()
 }

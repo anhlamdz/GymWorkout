@@ -9,20 +9,20 @@ import androidx.recyclerview.widget.RecyclerView
 import io.strongapp.gymworkout.data.database.ExerciseResponse
 import io.strongapp.gymworkout.data.database.entities.ExerciseGymEntity
 import io.strongapp.gymworkout.data.database.entities.UserEntity
+import io.strongapp.gymworkout.data.models.ExerciseRepXSetEntity
 import io.strongapp.gymworkout.databinding.ItemExerciseBinding
 import io.strongapp.gymworkout.databinding.ItemTrainingExBinding
 import io.strongapp.gymworkout.ui.me.viewmodel.UserViewModel
 
 
 class ExAdapter(
-	private val list : List<ExerciseResponse>,
+	private val list : List<ExerciseRepXSetEntity>,
 	private val context: Context,
-	private val userEntity: UserEntity
 ) : RecyclerView.Adapter<ExViewHolder>() {
 
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExViewHolder {
-		return ExViewHolder.create(parent,userEntity)
+		return ExViewHolder.create(parent)
 
 	}
 

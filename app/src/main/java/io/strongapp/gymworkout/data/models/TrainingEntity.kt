@@ -10,5 +10,5 @@ data class TrainingEntity(
 	val title: String,
 	val numberEx: Int,
 	val imageFocus: Int,
-	val list: List< ExerciseResponse>
+	val list: List<ExerciseRepXSetEntity>
 ) : Serializable

@@ -1,11 +1,10 @@
-package io.strongapp.gymworkout.ui.exercises.adpter
+package io.strongapp.gymworkout.ui.training.trainingdetail.adapter
 
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -22,52 +21,53 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import io.strongapp.gymworkout.R
 import io.strongapp.gymworkout.data.database.ExerciseResponse
-import io.strongapp.gymworkout.data.database.entities.ExerciseGymEntity
+import io.strongapp.gymworkout.data.models.ExerciseRepXSetEntity
 import io.strongapp.gymworkout.databinding.ItemExerciseBinding
+import io.strongapp.gymworkout.ui.exercises.adpter.InstructionsAdapter
 
-object ExerciseResponseDiffCallback : DiffUtil.ItemCallback<ExerciseResponse>() {
-    override fun areItemsTheSame(oldItem: ExerciseResponse, newItem: ExerciseResponse): Boolean {
-        return oldItem.id == newItem.id
-    }
+object ExerciseResponseDiffCallback : DiffUtil.ItemCallback<ExerciseRepXSetEntity>() {
+	override fun areItemsTheSame(oldItem: ExerciseRepXSetEntity, newItem: ExerciseRepXSetEntity): Boolean {
+		return oldItem.exerciseResponse.id == newItem.exerciseResponse.id
+	}
 
-    override fun areContentsTheSame(oldItem: ExerciseResponse, newItem: ExerciseResponse): Boolean {
-        return oldItem == newItem
-    }
+	override fun areContentsTheSame(oldItem: ExerciseRepXSetEntity, newItem: ExerciseRepXSetEntity): Boolean {
+		return oldItem.exerciseResponse == newItem.exerciseResponse
+	}
 
 }
 
-class ExercisesAdapter : ListAdapter<ExerciseResponse, ExercisesAdapter.ExercisesViewHolder>
+class TrainingDetailAdapter : ListAdapter<ExerciseRepXSetEntity, TrainingDetailAdapter.ExercisesViewHolder>
 	(ExerciseResponseDiffCallback) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExercisesViewHolder {
-        val binding =
-            ItemExerciseBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ExercisesViewHolder(binding)
-    }
+	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExercisesViewHolder {
+		val binding =
+			ItemExerciseBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+		return ExercisesViewHolder(binding)
+	}
 
-    override fun onBindViewHolder(holder: ExercisesViewHolder, position: Int) {
-        return holder.bind(getItem(position))
-    }
+	override fun onBindViewHolder(holder: ExercisesViewHolder, position: Int) {
+		return holder.bind(getItem(position))
+	}
 
-    inner class ExercisesViewHolder(private val binding: ItemExerciseBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(exerciseResponse: ExerciseResponse) {
-            binding.run {
-                binding.text.text = exerciseResponse.name
-                binding.text.capitalizeFirstLetter()
-                binding.secondaryText.text = exerciseResponse.target
-                binding.secondaryText.capitalizeFirstLetter()
-                Glide.with(itemView.context)
-                    .asBitmap()
-                    .load(Uri.parse(exerciseResponse.gifUrl))
-                    .into(imageEx)
-            }
-            itemView.setOnClickListener {
-                dialogExerciseDetail(exerciseResponse,itemView.context)
-            }
-        }
-    }
+	inner class ExercisesViewHolder(private val binding: ItemExerciseBinding) :
+		RecyclerView.ViewHolder(binding.root) {
+		fun bind(exerciseResponse: ExerciseRepXSetEntity) {
+			binding.run {
+				binding.text.text = exerciseResponse.exerciseResponse.name
+				binding.text.capitalizeFirstLetter()
+				binding.secondaryText.text = exerciseResponse.set.toString() + " Rep x " + exerciseResponse.rep + " Sets"
+				binding.secondaryText.capitalizeFirstLetter()
+				Glide.with(itemView.context)
+					.asBitmap()
+					.load(Uri.parse(exerciseResponse.exerciseResponse.gifUrl))
+					.into(imageEx)
+			}
+			itemView.setOnClickListener {
+				dialogExerciseDetail(exerciseResponse.exerciseResponse,itemView.context)
+			}
+		}
+	}
 
-    	private fun dialogExerciseDetail(exerciseResponse: ExerciseResponse, context: Context) {
+	private fun dialogExerciseDetail(exerciseResponse: ExerciseResponse, context: Context) {
 		val dialog = Dialog(context)
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
 		dialog.setContentView(R.layout.dialog_exercise_detail)
@@ -116,9 +116,9 @@ class ExercisesAdapter : ListAdapter<ExerciseResponse, ExercisesAdapter.Exercise
 			dialog.dismiss()
 		}
 	}
-    fun TextView.capitalizeFirstLetter() {
-        text = text.toString().capitalize()
-    }
+	fun TextView.capitalizeFirstLetter() {
+		text = text.toString().capitalize()
+	}
 
 
 }

@@ -10,9 +10,9 @@ import io.strongapp.gymworkout.databinding.ItemTrainingBinding
 import io.strongapp.gymworkout.ui.training.adapter.exadapter.ExAdapter
 import io.strongapp.gymworkout.data.models.TrainingEntity
 
-class TrainingViewHolder(val binding: ItemTrainingBinding,val user : UserEntity) : RecyclerView.ViewHolder(binding.root) {
+class TrainingViewHolder(val binding: ItemTrainingBinding) : RecyclerView.ViewHolder(binding.root) {
 	fun bind(training: TrainingEntity) {
-		val adapter = ExAdapter(training.list,itemView.context, user)
+		val adapter = ExAdapter(training.list,itemView.context)
 		binding.nameTraining.text = training.title
 		binding.nameTraining.capitalizeFirstLetter()
 		binding.numberEx.text = training.numberEx.toString()
@@ -26,13 +26,13 @@ class TrainingViewHolder(val binding: ItemTrainingBinding,val user : UserEntity)
 		text = text.toString().capitalize()
 	}
 	companion object {
-		fun create(viewGroup: ViewGroup, user: UserEntity): TrainingViewHolder {
+		fun create(viewGroup: ViewGroup): TrainingViewHolder {
 			return TrainingViewHolder(
 				binding = ItemTrainingBinding.inflate(
 					LayoutInflater.from(viewGroup.context),
 					viewGroup,
 					false
-				),  user = user
+				)
 			)
 
 		}

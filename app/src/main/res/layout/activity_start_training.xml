@@ -4,7 +4,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#F2F2F2">
         <ImageView
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
@@ -38,7 +39,6 @@
             android:textSize="17dp"
             android:fontFamily="@font/montserrat_regular"
             android:textColor="@color/black"/>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_exercises"
             android:layout_width="match_parent"

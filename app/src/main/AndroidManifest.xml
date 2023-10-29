@@ -40,7 +40,7 @@
             android:exported="true"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".ui.training.TrainingDetailAct"
+            android:name=".ui.training.trainingdetail.TrainingDetailAct"
             android:exported="true"
             android:screenOrientation="portrait"/>
         <activity

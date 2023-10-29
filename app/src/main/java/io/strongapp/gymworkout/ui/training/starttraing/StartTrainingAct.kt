@@ -1,17 +1,22 @@
 package io.strongapp.gymworkout.ui.training.starttraing
 
 import android.os.Handler
-import androidx.navigation.navArgument
+import android.util.Log
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.strongapp.gymworkout.R
 import io.strongapp.gymworkout.base.BaseActivity
 import io.strongapp.gymworkout.data.models.TrainingEntity
 import io.strongapp.gymworkout.databinding.ActivityStartTrainingBinding
-import io.strongapp.gymworkout.ui.exercises.adpter.ExercisesAdapter
+import io.strongapp.gymworkout.ui.training.starttraing.adapter.StartTrainingAdapter
+
 
 class StartTrainingAct : BaseActivity<ActivityStartTrainingBinding>() {
 	private lateinit var exerciseItem : TrainingEntity
-	private val exercisesAdapter by lazy(LazyThreadSafetyMode.NONE) { ExercisesAdapter() }
+	private val startTrainingDetailAdapter by lazy(LazyThreadSafetyMode.NONE) { StartTrainingAdapter() }
+	private var currentPosition = -1
+
+
 	override fun initView() {
 		exerciseItem = intent.getSerializableExtra("exercise") as TrainingEntity
 		binding.name.text = exerciseItem.title
@@ -20,13 +25,22 @@ class StartTrainingAct : BaseActivity<ActivityStartTrainingBinding>() {
 
 		startTimer()
 		binding.rcvExercises.layoutManager = LinearLayoutManager(this)
-		exercisesAdapter.submitList(exerciseItem.list)
-		binding.rcvExercises.adapter = exercisesAdapter
+		startTrainingDetailAdapter.submitList(exerciseItem.list)
+		binding.rcvExercises.adapter = startTrainingDetailAdapter
+
+
+
 	}
 
 	override fun initAction() {
 		binding.btnBack.setOnClickListener {
 			finish()
+		}
+
+		binding.btnNext.setOnClickListener {
+				currentPosition++
+			Log.i("hahaha", currentPosition.toString())
+				startTrainingDetailAdapter.currentViewHolder?.openToDoRcv(currentPosition)
 		}
 	}
 
@@ -37,6 +51,7 @@ class StartTrainingAct : BaseActivity<ActivityStartTrainingBinding>() {
 	override fun bindViewModel() {
 
 	}
+
 	private fun startTimer() {
 		val handler = Handler()
 		var seconds = 0
@@ -61,4 +76,5 @@ class StartTrainingAct : BaseActivity<ActivityStartTrainingBinding>() {
 		},1000)
 
 	}
+
 }

@@ -17,6 +17,7 @@ import io.strongapp.gymworkout.data.api.ApiViewModel
 import io.strongapp.gymworkout.data.api.RetrofitClient
 import io.strongapp.gymworkout.data.api.StateApi
 import io.strongapp.gymworkout.data.database.ExerciseResponse
+import io.strongapp.gymworkout.data.repository.DataRepository
 import io.strongapp.gymworkout.databinding.FragmentExercisesBinding
 import io.strongapp.gymworkout.ui.exercises.adpter.ExercisesAdapter
 import io.strongapp.gymworkout.ui.exercises.viewmodel.ExercisesViewModel
@@ -27,11 +28,12 @@ class ExercisesFr constructor() : BaseFragment<FragmentExercisesBinding>() {
     private lateinit var edtSearch: EditText
     private lateinit var inputMethodManager: InputMethodManager
     private val exercisesAdapter by lazy(LazyThreadSafetyMode.NONE) { ExercisesAdapter() }
+    private val dataRepository  = DataRepository()
     private val viewModel by viewModels<ApiViewModel>(
         factoryProducer = {
             viewModelFactory {
                 addInitializer(ApiViewModel::class) {
-                    ApiViewModel(RetrofitClient.apiService)
+                    ApiViewModel(RetrofitClient.apiService,dataRepository)
                 }
             }
         }
@@ -69,7 +71,13 @@ class ExercisesFr constructor() : BaseFragment<FragmentExercisesBinding>() {
         exercisesViewModel = ViewModelProvider(requireActivity())[ExercisesViewModel::class.java]
         binding.rcvExercises.layoutManager = LinearLayoutManager(requireContext())
         binding.rcvExercises.adapter = exercisesAdapter
-        viewModel.getAllExercises()
+        if (exercisesViewModel.exerciseList != null) {
+            val exerciseList = exercisesViewModel.exerciseList as List<ExerciseResponse>
+            exercisesAdapter.submitList(exerciseList)
+            filter(exerciseList)
+        } else {
+            viewModel.getAllExercises()
+        }
         observer()
     }
 
@@ -81,11 +89,9 @@ class ExercisesFr constructor() : BaseFragment<FragmentExercisesBinding>() {
                 }
 
                 is StateApi.Success -> {
+                    exercisesViewModel.exerciseList = it.exerciseResponse
                     exercisesAdapter.submitList(it.exerciseResponse)
                     filter(it.exerciseResponse)
-                }
-                is StateApi.SuccessSingle -> {
-
                 }
                 is StateApi.Failed -> {
 

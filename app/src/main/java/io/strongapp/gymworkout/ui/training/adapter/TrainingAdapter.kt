@@ -4,22 +4,19 @@ import android.content.Context
 import android.content.Intent
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.PrimaryKey
-import io.strongapp.gymworkout.data.database.entities.UserEntity
 import io.strongapp.gymworkout.data.models.TrainingEntity
-import io.strongapp.gymworkout.ui.training.TrainingDetailAct
+import io.strongapp.gymworkout.ui.training.trainingdetail.TrainingDetailAct
 
 
 class TrainingAdapter(
 	private val list: List<TrainingEntity>,
-	private val context: Context,
-	private val user : UserEntity
+	private val context: Context
 ) :
 	RecyclerView.Adapter<TrainingViewHolder>() {
 
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrainingViewHolder {
-		return TrainingViewHolder.create(parent,user)
+		return TrainingViewHolder.create(parent)
 	}
 
 	override fun getItemCount(): Int {
