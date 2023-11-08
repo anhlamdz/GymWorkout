@@ -58,63 +58,71 @@ class FragmentGuideGoalBody  : BaseFragment<FragmentGuideTargetBodyBinding>() {
 		binding.currentWeightIncrease.text = currWeight.toInt().toString()
 		binding.currentWeightReduce.text = currWeight.toInt().toString()
 		if(targetWeight > currWeight){
-			binding.description.text = "It takes about "+ timeIncrease(targetWeight) +" days to gain weight"
+			binding.description.text = "Phải mất khoảng "+ timeIncrease(targetWeight) +" ngày để tăng cân"
 			binding.iRight.visibility = View.VISIBLE
+			binding.description.visibility = View.VISIBLE
 			binding.currentWeightReduce.visibility = View.INVISIBLE
 			binding.iLeft.visibility = View.INVISIBLE
 			binding.currentWeightIncrease.visibility = View.VISIBLE
 			val increase = ((targetWeight/currWeight)-1)*100
 			val roundedIncrease = "%.2f".format(increase).toFloat()
-			if(roundedIncrease > 5.0f && roundedIncrease<6.0f){
+			if(roundedIncrease > 5.0f && roundedIncrease<9.0f){
 				binding.tvComment.text = "Sweaty choice!"
 				binding.tvComment.setTextColor(resources.getColor(R.color.orange))
-
-				binding.descriptionComment.text= "You will gain "+" "+roundedIncrease+"% of body weight"
+				binding.description.visibility = View.VISIBLE
+				binding.descriptionComment.text= "Bạn sẽ tăng được "+" "+roundedIncrease+"% trọng lượng cơ thể"
 			}
 			else if(roundedIncrease < 5.0f){
-				binding.tvComment.text = "Reasonable target!"
+				binding.tvComment.text = "Mục tiêu hợp lý!"
 				binding.tvComment.setTextColor(resources.getColor(R.color.green))
-
-				binding.descriptionComment.text= "You will gain "+" "+roundedIncrease+"% of body weight"
+				binding.description.visibility = View.VISIBLE
+				binding.descriptionComment.text= "Bạn sẽ tăng được "+" "+roundedIncrease+"% trọng lượng cơ thể"
 			}
-			else if (roundedIncrease > 6.0f){
-				binding.tvComment.text = "Attention!"
+
+			else if (roundedIncrease > 9.0f){
+				binding.tvComment.text = "Chú ý!"
 				binding.tvComment.setTextColor(resources.getColor(R.color.colorAccent))
-
-				binding.descriptionComment.text= "It seems that your target BMI is too high, which might cause some health problems..."
+				binding.description.visibility = View.INVISIBLE
+				binding.descriptionComment.text= "Có vẻ như chỉ số BMI mục tiêu của bạn quá cao, điều này có thể gây ra một số vấn đề về sức khỏe..."
 			}
+
 		}
 		else if (targetWeight < currWeight){
-			binding.description.text = "It takes about "+ timeReduce(targetWeight) +" days to lose weight"
+			binding.description.text = "Phải mất khoảng "+ timeReduce(targetWeight) +" ngày để giảm cân"
 			binding.iRight.visibility = View.INVISIBLE
 			binding.currentWeightReduce.visibility = View.VISIBLE
 			binding.iLeft.visibility = View.VISIBLE
+			binding.description.visibility = View.VISIBLE
 			binding.currentWeightIncrease.visibility = View.INVISIBLE
 			val reduce = (1 - (targetWeight/currWeight))*100
 			val roundedReduce = "%.2f".format(reduce).toFloat()
 			if (roundedReduce < 10.0f){
-				binding.tvComment.text = "Reasonable target!"
+				binding.tvComment.text = "Mục tiêu hợp lý!"
 				binding.tvComment.setTextColor(resources.getColor(R.color.green))
 				binding.descriptionComment.visibility = View.VISIBLE
-				binding.descriptionComment.text= "You will lose"+" "+roundedReduce+"% of body weight"
+				binding.description.visibility = View.VISIBLE
+				binding.descriptionComment.text= "Bạn sẽ giảm"+" "+roundedReduce+"% trọng lượng cơ thể"
 			}
 			else if (roundedReduce > 10.0f && roundedReduce < 16.0f){
 				binding.tvComment.text = "Sweaty choice!"
 				binding.tvComment.setTextColor(resources.getColor(R.color.orange))
 				binding.descriptionComment.visibility = View.VISIBLE
-				binding.descriptionComment.text= "You will lose"+" "+roundedReduce+"% of body weight"
+				binding.description.visibility = View.VISIBLE
+				binding.descriptionComment.text= "Bạn sẽ giảm"+" "+roundedReduce+"% trọng lượng cơ thể"
 			}
 			else if (roundedReduce > 16.0f && roundedReduce < 21.0f){
-				binding.tvComment.text = "Challenging Goal!"
+				binding.tvComment.text = "Mục tiêu đầy thử thách!"
 				binding.tvComment.setTextColor(resources.getColor(R.color.colorAccent))
 				binding.descriptionComment.visibility = View.VISIBLE
-				binding.descriptionComment.text= "You will lose"+" "+roundedReduce+"% of body weight"
+				binding.description.visibility = View.VISIBLE
+				binding.descriptionComment.text= "Bạn sẽ giảm $roundedReduce% trọng lượng cơ thể"
 			}
 			else if (roundedReduce > 21.0f){
-				binding.tvComment.text = "Attention!"
+				binding.tvComment.text = "Chú ý!"
 				binding.tvComment.setTextColor(resources.getColor(R.color.colorAccent))
 				binding.descriptionComment.visibility = View.VISIBLE
-				binding.descriptionComment.text= "It seems that your target BMI is too lose, which might cause some health problems..."
+				binding.description.visibility = View.INVISIBLE
+				binding.descriptionComment.text= "Có vẻ như chỉ số BMI mục tiêu của bạn đang bị giảm quá mức, điều này có thể gây ra một số vấn đề về sức khỏe..."
 			}
 		}
 		else if (targetWeight == currWeight){
@@ -122,10 +130,10 @@ class FragmentGuideGoalBody  : BaseFragment<FragmentGuideTargetBodyBinding>() {
 			binding.currentWeightReduce.visibility = View.INVISIBLE
 			binding.iLeft.visibility = View.INVISIBLE
 			binding.currentWeightIncrease.visibility = View.INVISIBLE
-			binding.tvComment.text = "Not bad!"
+			binding.tvComment.text = "Không tệ!"
 			binding.tvComment.setTextColor(resources.getColor(R.color.theme_color))
 			binding.descriptionComment.visibility = View.VISIBLE
-			binding.descriptionComment.text= "You will keep on with your current body weight!"
+			binding.descriptionComment.text= "Bạn sẽ tiếp tục với trọng lượng cơ thể hiện tại của mình!"
 		}
 
 	}

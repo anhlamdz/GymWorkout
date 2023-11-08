@@ -11,7 +11,6 @@ import io.strongapp.gymworkout.data.database.ExerciseResponse
 import kotlinx.coroutines.launch
 
 class ExercisesViewModel(application: Application) : AndroidViewModel(application) {
-	var exerciseList : List<ExerciseResponse>? = null
 	val exerciseGymEntity : LiveData<MutableList<ExerciseGymEntity>>
 	val exercisesRepository : ExercisesRepository
 

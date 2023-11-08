@@ -28,12 +28,11 @@ class ExercisesFr constructor() : BaseFragment<FragmentExercisesBinding>() {
     private lateinit var edtSearch: EditText
     private lateinit var inputMethodManager: InputMethodManager
     private val exercisesAdapter by lazy(LazyThreadSafetyMode.NONE) { ExercisesAdapter() }
-    private val dataRepository  = DataRepository()
     private val viewModel by viewModels<ApiViewModel>(
         factoryProducer = {
             viewModelFactory {
                 addInitializer(ApiViewModel::class) {
-                    ApiViewModel(RetrofitClient.apiService,dataRepository)
+                    ApiViewModel(RetrofitClient.apiService)
                 }
             }
         }
@@ -71,13 +70,7 @@ class ExercisesFr constructor() : BaseFragment<FragmentExercisesBinding>() {
         exercisesViewModel = ViewModelProvider(requireActivity())[ExercisesViewModel::class.java]
         binding.rcvExercises.layoutManager = LinearLayoutManager(requireContext())
         binding.rcvExercises.adapter = exercisesAdapter
-        if (exercisesViewModel.exerciseList != null) {
-            val exerciseList = exercisesViewModel.exerciseList as List<ExerciseResponse>
-            exercisesAdapter.submitList(exerciseList)
-            filter(exerciseList)
-        } else {
-            viewModel.getAllExercises()
-        }
+        viewModel.getAllExercises()
         observer()
     }
 
@@ -87,12 +80,11 @@ class ExercisesFr constructor() : BaseFragment<FragmentExercisesBinding>() {
                 is StateApi.Loading -> {
 
                 }
-
                 is StateApi.Success -> {
-                    exercisesViewModel.exerciseList = it.exerciseResponse
                     exercisesAdapter.submitList(it.exerciseResponse)
                     filter(it.exerciseResponse)
                 }
+                is StateApi.SuccessFood->{}
                 is StateApi.Failed -> {
 
                 }

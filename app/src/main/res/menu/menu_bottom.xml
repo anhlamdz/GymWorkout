@@ -4,26 +4,30 @@
     <item
         android:id="@+id/training"
         android:icon="@drawable/ic_training"
-        android:title="Training"
+        android:title="Huấn luyện"
+
         />
     <item
         android:id="@+id/custom"
         android:icon="@drawable/ic_custom"
-        android:title="Custom"/>
+        android:title="Tùy chỉnh"
+        />
     <item
         android:id="@+id/exercises"
         android:icon="@drawable/ic_exercises"
-        android:title="Exercises"
-        />
+        android:title="Bài tập"
 
+        />
     <item
         android:id="@+id/food"
         android:icon="@drawable/ic_food"
-        android:title="Food"
+        android:title="Thực phẩm"
+
         />
     <item
         android:id="@+id/me"
         android:icon="@drawable/ic_me"
-        android:title="Me"
+        android:title="Bản thân"
+
         />
 </menu>

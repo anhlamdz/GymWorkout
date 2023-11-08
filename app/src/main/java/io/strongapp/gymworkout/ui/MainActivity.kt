@@ -38,7 +38,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
 	override fun initAction() {
 //		replaceFragment(TrainingFr(), 0)
-//
 //		binding.bottomNav.setOnItemSelectedListener { menuItem ->
 //			val fragment = when (menuItem.itemId) {
 //				R.id.training -> TrainingFr()

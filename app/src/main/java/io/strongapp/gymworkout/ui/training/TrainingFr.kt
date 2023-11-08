@@ -34,12 +34,12 @@ import kotlin.math.log
 class TrainingFr : BaseFragment<FragmentTrainingBinding>() {
 	private lateinit var userViewModel: UserViewModel
 	private lateinit var exercisesViewModel : ExercisesViewModel
-	private val dataResponse = DataRepository()
+
 	private val viewModel by viewModels<ApiViewModel>(
 		factoryProducer = {
 			viewModelFactory {
 				addInitializer(ApiViewModel::class) {
-					ApiViewModel(RetrofitClient.apiService,dataResponse)
+					ApiViewModel(RetrofitClient.apiService)
 				}
 			}
 		}
@@ -148,12 +148,7 @@ class TrainingFr : BaseFragment<FragmentTrainingBinding>() {
 		binding.rcvTraining.layoutManager = LinearLayoutManager(requireContext())
 		userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 		exercisesViewModel = ViewModelProvider(this)[ExercisesViewModel::class.java]
-		if (exercisesViewModel.exerciseList != null) {
-			val exerciseList = exercisesViewModel.exerciseList as List<ExerciseResponse>
-			loadData(exerciseList)
-		} else {
-			viewModel.getAllExercises()
-		}
+		viewModel.getAllExercises()
 		observer()
 
 	}
@@ -164,6 +159,9 @@ class TrainingFr : BaseFragment<FragmentTrainingBinding>() {
 				is StateApi.Success -> {
 					val exerciseResponse = state.exerciseResponse
 					loadData(exerciseResponse)
+				}
+				is StateApi.SuccessFood -> {
+
 				}
 				is StateApi.Failed -> {
 					// Handle failure
@@ -196,8 +194,8 @@ class TrainingFr : BaseFragment<FragmentTrainingBinding>() {
 			"Arm Workout" to listArmWorkout,
 			"Shoulders Workout" to listShoulderWorkout,
 			"Lower Body Workout" to listLowerBodyWorkout,
-			"Stronglifts 5*5 A" to listStrongLiftsA,
-			"Stronglifts 5*5 B" to listStrongLiftsB,
+			"Stronglifts A" to listStrongLiftsA,
+			"Stronglifts B" to listStrongLiftsB,
 			"Upper Body Workout" to listUpperBodyWorkout,
 			"Abs Workout" to listAbsWorkout,
 			"V-Taper Workout" to listVtaperWorkout,
@@ -220,8 +218,8 @@ class TrainingFr : BaseFragment<FragmentTrainingBinding>() {
 			"Arm Workout" -> R.drawable.img_creator_partf_arm
 			"Shoulders Workout" -> R.drawable.img_creator_partf_shoulder
 			"Lower Body Workout" -> R.drawable.img_creator_partf_lower
-			"Stronglifts 5*5 A" -> R.color.orange // Use the actual resource here
-			"Stronglifts 5*5 B" -> R.color.green // Use the actual resource here
+			"Stronglifts A" -> R.color.orange // Use the actual resource here
+			"Stronglifts B" -> R.color.green // Use the actual resource here
 			"Upper Body Workout" -> R.drawable.img_creator_partf_upper
 			"Abs Workout" -> R.drawable.img_creator_partf_abs
 			"V-Taper Workout" -> R.drawable.img_creator_partf_vtaper
@@ -233,19 +231,19 @@ class TrainingFr : BaseFragment<FragmentTrainingBinding>() {
 		val rep: Int
 		val set: Int
 		when (userGoal) {
-			"Muscle Gain" -> {
+			"Tăng cơ bắp" -> {
 				rep = 8
 				set = 4
 			}
-			"Endurance" -> {
+			"Sức bền" -> {
 				rep = 12
 				set = 3
 			}
-			"Max Strength" -> {
+			"Sức mạnh tối đa" -> {
 				rep = 6
 				set = 3
 			}
-			"Get Toned" -> {
+			"Cải thiện vóc dáng" -> {
 				rep = 6
 				set = 4
 			}

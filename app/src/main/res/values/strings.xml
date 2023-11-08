@@ -1,41 +1,59 @@
 <resources>
     <string name="app_name">GymWorkout</string>
-    <string name="btn_next">Next</string>
-    //setting
-    <string name="title_setting">Setting</string>
-    <string name="lang_setting">Language Options</string>
-    <string name="rate_setting">Rate us</string>
-    <string name="polity_setting">Privacy Policy</string>
-    //exercise
-    <string name="btn_close">Close</string>
-    <string name="title_exercises">Exercises</string>
-    <string name="focus_area">Focus area</string>
-    <string name="equipment">Equipment</string>
-    <string name="btn_done">Done</string>
-    <string name="instructions">instructions</string>
-    <string name="search_hint">Search Exercise</string>
-    //profile
-    <string name="gender_title">"What's your gender?"</string>
-    <string name="male">Male</string>
-    <string name="female">Female</string>
-    <string name="goal_title">"What's your goal?"</string>
-    <string name="goal_title1">Muscle Gain</string>
-    <string name="goal_description1">Focus on muscle mass &amp; size growth</string>
-    <string name="goal_title2">Endurance</string>
-    <string name="goal_description2">Focus on muscular stamina &amp; conditioning improvement</string>
-    <string name="goal_title3">Max Strength</string>
-    <string name="goal_description3">Focus on explosive strength &amp; power building</string>
-    <string name="goal_title4">Get Toned</string>
-    <string name="goal_description4">Focus on body sculpted &amp; fat burn</string>
-    <string name="name_title">"What's your name?"</string>
-    <string name="age_title">How old are you?</string>
-    <string name="height_title">"What's your height?"</string>
-    <string name="curr_weight_title">"What's your current weight?"</string>
-    <string name="target_weight_title">"What's your target weight?"</string>
-    <string name="bmi_title">Your current bmi</string>
-    <string name="bmi_explain">Body mass index (BMI) is a measure of body fat based on height and weight. It gives you a clue as to the risk of weight-related health problems.</string>
-    <string name="often_do_exercise">How often do you exercise a week?</string>
-    <string name="title_training">Training</string>
-    <string name="btn_start">Start</string>
-    <string name="btn_logNextSet">Log Next Set</string>
+    <string name="btn_next">Tiếp theo</string>
+    <string name="btn_finish">Hoàn thành</string>
+    <!-- Cài đặt -->
+    <string name="title_setting">Cài đặt</string>
+    <string name="lang_setting">Tùy chọn Ngôn ngữ</string>
+    <string name="rate_setting">Đánh giá ứng dụng</string>
+    <string name="polity_setting">Chính sách bảo mật</string>
+    <!-- Bài tập -->
+    <string name="btn_close">Đóng</string>
+    <string name="title_exercises">Bài tập</string>
+    <string name="focus_area">Tập trung</string>
+    <string name="equipment">Thiết bị</string>
+    <string name="btn_done">Hoàn tất</string>
+    <string name="instructions">Hướng dẫn</string>
+    <string name="search_hint">Tìm kiếm Bài tập</string>
+    <!-- Hồ sơ -->
+    <string name="gender_title">"Giới tính của bạn là gì?"</string>
+    <string name="male">Nam</string>
+    <string name="female">Nữ</string>
+    <string name="goal_title">"Mục tiêu của bạn là gì?"</string>
+    <string name="goal_title1">Tăng cơ bắp</string>
+    <string name="goal_description1">Tập trung vào việc tăng khối lượng và kích thước cơ bắp</string>
+    <string name="goal_title2">Sức bền</string>
+    <string name="goal_description2">Tập trung vào tăng sức bền cơ bắp và cải thiện sức kháng</string>
+    <string name="goal_title3">Sức mạnh tối đa</string>
+    <string name="goal_description3">Tập trung vào việc xây dựng sức mạnh và sức mạnh nổ</string>
+    <string name="goal_title4">Cải thiện vóc dáng</string>
+    <string name="goal_description4">Tập trung vào việc điều chỉnh vóc dáng và đốt mỡ</string>
+    <string name="name_title">"Tên của bạn là gì?"</string>
+    <string name="age_title">Bạn bao nhiêu tuổi?</string>
+    <string name="height_title">"Chiều cao của bạn là bao nhiêu?"</string>
+    <string name="curr_weight_title">"Cân nặng hiện tại của bạn là bao nhiêu?"</string>
+    <string name="target_weight_title">"Mục tiêu cân nặng của bạn là bao nhiêu?"</string>
+    <string name="bmi_title">Chỉ số BMI của bạn</string>
+    <string name="bmi_explain">Chỉ số khối lượng cơ thể (BMI) là một chỉ số đo lường lượng mỡ trong cơ thể dựa trên chiều cao và cân nặng. Nó giúp bạn đánh giá nguy cơ liên quan đến vấn đề sức khỏe liên quan đến cân nặng.</string>
+    <string name="often_do_exercise">Tần suất tập luyện của bạn?</string>
+    <string name="title_training">Huấn luyện</string>
+    <string name="btn_start">Bắt đầu</string>
+    <string name="btn_logNextSet">Ghi chú Bộ tiếp theo</string>
+    <!-- Tùy chỉnh -->
+    <string name="title_custom">Tùy chỉnh</string>
+    <string name="description_custom_1">Tạo bài tập tùy chỉnh đầu tiên của bạn</string>
+    <string name="description_custom_2">Thiết lập kế hoạch riêng của bạn</string>
+    <string name="btn_new">Mới</string>
+    <!-- Thực phẩm -->
+    <string name="title_food">Thực phẩm</string>
+    <string name="title_calories">Lượng calo</string>
+    <string name="remaining">Còn lại</string>
+    <string name="base_goal">Mục tiêu cơ bản</string>
+    <string name="title_eaten">Đã ăn</string>
+    <string name="breakfast">Bữa sáng</string>
+    <string name="lunch">Bữa trưa</string>
+    <string name="dinner">Bữa tối</string>
+    <string name="snacks">Món ăn nhẹ</string>
+    <string name="add_food">Thêm thực phẩm</string>
+    <string name="search">Tìm kiếm</string>
 </resources>

@@ -87,7 +87,14 @@ dependencies {
 	// navigation
 	implementation ("androidx.navigation:navigation-fragment-ktx:2.7.4")
 	implementation ("androidx.navigation:navigation-ui-ktx:2.7.4")
+	// Feature module Support
+	implementation("androidx.navigation:navigation-dynamic-features-fragment:2.7.4")
 
+	// Testing Navigation
+	androidTestImplementation("androidx.navigation:navigation-testing:2.7.4")
+
+	// Jetpack Compose Integration
+	implementation("androidx.navigation:navigation-compose:2.7.4")
 	//room
 	val room_version = "2.5.2"
 	implementation("androidx.room:room-runtime:$room_version")

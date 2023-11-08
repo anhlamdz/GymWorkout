@@ -39,35 +39,29 @@
             android:textSize="17dp"
             android:fontFamily="@font/montserrat_regular"
             android:textColor="@color/black"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btn_finish"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_layout_training_btn"
+            app:layout_constraintTop_toTopOf="@id/btn_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/btn_back"
+            android:padding="8dp"
+            android:layout_marginEnd="16dp"
+            android:textAllCaps="true"
+            />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_exercises"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginVertical="8dp"
-            app:layout_constraintBottom_toTopOf="@+id/btn_next"
-            app:layout_constraintTop_toBottomOf="@id/time" />
-        <FrameLayout
-            android:id="@+id/btn_next"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_btn_radios"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="16dp"
-            android:paddingVertical="10dp"
-            android:layout_marginHorizontal="16dp">
-            <TextView
-                android:id="@+id/tvNext"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_logNextSet"
-                android:textAllCaps="true"
-                android:textSize="19sp"
-                android:textColor="@color/white"
-                android:layout_gravity="center_horizontal"
-                android:fontFamily="@font/montserrat_bold"
-                />
-        </FrameLayout>
+
+            app:layout_constraintTop_toBottomOf="@id/time" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

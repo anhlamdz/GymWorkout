@@ -37,11 +37,6 @@ class StartTrainingAct : BaseActivity<ActivityStartTrainingBinding>() {
 			finish()
 		}
 
-		binding.btnNext.setOnClickListener {
-				currentPosition++
-			Log.i("hahaha", currentPosition.toString())
-				startTrainingDetailAdapter.currentViewHolder?.openToDoRcv(currentPosition)
-		}
 	}
 
 	override fun getContentView(): Int {

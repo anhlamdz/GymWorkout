@@ -43,6 +43,11 @@
             android:name=".ui.training.trainingdetail.TrainingDetailAct"
             android:exported="true"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".ui.food.searchfood.SearchFoodAct"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.guide.GuideAct"
             android:exported="true"

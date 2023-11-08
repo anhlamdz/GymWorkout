@@ -65,13 +65,13 @@ class FragmentGuideWeight  : BaseFragment<FragmentGuideWeightBinding>() {
 			binding.tvBMI.text = roundedBmi
 			if (bmi <= 18.4) {
 				binding.tvBMI.setTextColor(resources.getColor(R.color.theme_color))
-				binding.descriptionBMI.text = "You have a great potential to get in better shape, move now!"
+				binding.descriptionBMI.text = "Bạn có tiềm năng lớn để có được vóc dáng đẹp hơn, hãy di chuyển ngay bây giờ!"
 			} else if (18.5 <= bmi && bmi <= 24.9) {
 				binding.tvBMI.setTextColor(resources.getColor(R.color.green))
-				binding.descriptionBMI.text = "You've got a great figure! Keep it up!"
+				binding.descriptionBMI.text = "Bạn có một thân hình tuyệt vời! Giữ lấy nó!"
 			} else if (bmi > 25.0) {
 				binding.tvBMI.setTextColor(resources.getColor(R.color.orange))
-				binding.descriptionBMI.text = "You only need a bit more sweat exercises to see a fitter you!"
+				binding.descriptionBMI.text = "Bạn chỉ cần tập luyện nhiều hơn một chút để thấy mình thon gọn hơn!"
 			}
 	}
 	private fun showPopup(context: Context, anchorView: View) {
@@ -80,8 +80,8 @@ class FragmentGuideWeight  : BaseFragment<FragmentGuideWeightBinding>() {
 		popupWindow.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 		val location = IntArray(2)
 		anchorView.getLocationOnScreen(location)
-		val x = location[0] + anchorView.height
-		val y = location[1] - popupView.width-33
+		val x = location[0] + anchorView.height+20
+		val y = location[1] - popupView.width-130
 		popupWindow.showAtLocation(anchorView, Gravity.NO_GRAVITY,x, y)
 		Handler().postDelayed({
 			popupWindow.dismiss()

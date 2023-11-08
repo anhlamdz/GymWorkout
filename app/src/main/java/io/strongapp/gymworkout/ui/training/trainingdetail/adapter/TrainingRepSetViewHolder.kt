@@ -1,16 +1,20 @@
 package io.strongapp.gymworkout.ui.training.trainingdetail.adapter
 
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import io.strongapp.gymworkout.R
 import io.strongapp.gymworkout.data.models.ExerciseRepXSetEntity
+import io.strongapp.gymworkout.data.models.actualPracticeEntity
 import io.strongapp.gymworkout.databinding.ItemRepSetBinding
 import io.strongapp.gymworkout.databinding.ItemTrainingExBinding
 
-class TrainingRepSetViewHolder(private val binding: ItemRepSetBinding) : RecyclerView.ViewHolder(binding.root) {
-	fun bind(number: Int) {
-		binding.numberRep.text = number.toString()
+class TrainingRepSetViewHolder(val binding: ItemRepSetBinding) : RecyclerView.ViewHolder(binding.root) {
+	fun bind(number: actualPracticeEntity) {
+		binding.numberRep.text = number.set.toString()
+		binding.rep.text = number.rep.toString().toEditable()
 	}
 
 	companion object {
@@ -24,5 +28,8 @@ class TrainingRepSetViewHolder(private val binding: ItemRepSetBinding) : Recycle
 			)
 
 		}
+	}
+	fun String.toEditable(): Editable {
+		return Editable.Factory.getInstance().newEditable(this)
 	}
 }

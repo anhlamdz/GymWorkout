@@ -2,6 +2,7 @@ package io.strongapp.gymworkout.ui.guide
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -73,11 +74,10 @@ class GuideAct : BaseActivity<ActivityGuideBinding>() {
 	override fun initAction() {
 		binding.btnBack.setOnClickListener {
 			if (currentProgress <= 100) {
-				if (currentProgress > 12.5) {
-					currentProgress -= (12.5).toInt()
-					binding.progressBar.progress = currentProgress.toInt()
-					binding.viewPager.setCurrentItem(currentItem - 1, true)
-				}
+				currentProgress -= 12.5
+				binding.progressBar.progress = currentProgress.toInt()
+				Log.i("TAG", currentProgress.toString())
+				binding.viewPager.setCurrentItem(currentItem - 1, true)
 			}
 		}
 	}
@@ -89,10 +89,9 @@ class GuideAct : BaseActivity<ActivityGuideBinding>() {
 			if (currentProgress > 100) {
 				startActivity(MainActivity.getIntent(this))
 			} else {
+				Log.i("TAG", currentProgress.toString())
 				// Chuyển sang fragment tiếp theo
-				if (currentItem < fragments.size - 1) {
-					binding.viewPager.setCurrentItem(currentItem + 1, true)
-				}
+				binding.viewPager.setCurrentItem(currentItem + 1, true)
 			}
 		}
 	}

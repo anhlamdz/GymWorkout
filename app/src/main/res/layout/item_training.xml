@@ -32,7 +32,7 @@
             android:id="@+id/Ex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="exercises"
+            android:text="bài tập"
             android:layout_marginStart="3dp"
             app:layout_constraintTop_toBottomOf="@id/name_training"
             app:layout_constraintStart_toEndOf="@id/numberEx"
