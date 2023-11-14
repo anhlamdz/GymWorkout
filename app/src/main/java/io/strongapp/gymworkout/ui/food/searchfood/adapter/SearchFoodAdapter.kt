@@ -1,5 +1,6 @@
 package io.strongapp.gymworkout.ui.food.searchfood.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -21,8 +22,7 @@ object FoodResponseDiffCallback : DiffUtil.ItemCallback<FoodResponse>() {
 class SearchFoodAdapter : ListAdapter<FoodResponse, SearchFoodAdapter.FoodViewHolder>
 	(FoodResponseDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
-        val binding =
-            ItemFoodBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemFoodBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FoodViewHolder(binding)
     }
 
@@ -35,6 +35,7 @@ class SearchFoodAdapter : ListAdapter<FoodResponse, SearchFoodAdapter.FoodViewHo
         fun bind(foodResponse: FoodResponse) {
             binding.run {
                 nameFood.text = foodResponse.name
+                Log.i("hahahaha", foodResponse.toString())
 //	            infoFood.text= foodResponse.calories.toString()+" g,"
             }
 //            "${foodResponse.calories} cal, ${foodResponse.carbonHydrates} carb, ${foodResponse.fat} fat, ${foodResponse.protein} protein, ${foodResponse.weight} g"

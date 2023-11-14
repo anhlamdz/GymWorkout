@@ -3,19 +3,20 @@ package io.strongapp.gymworkout.ui.training.starttraing
 import android.os.Handler
 import android.util.Log
 import android.view.View
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.strongapp.gymworkout.R
 import io.strongapp.gymworkout.base.BaseActivity
 import io.strongapp.gymworkout.data.models.TrainingEntity
 import io.strongapp.gymworkout.databinding.ActivityStartTrainingBinding
 import io.strongapp.gymworkout.ui.training.starttraing.adapter.StartTrainingAdapter
+import io.strongapp.gymworkout.ui.training.trainingdetail.adapter.TrainingRepSetAdapter
+import io.strongapp.gymworkout.view.FinishTrainingDialog
 
 
 class StartTrainingAct : BaseActivity<ActivityStartTrainingBinding>() {
 	private lateinit var exerciseItem : TrainingEntity
 	private val startTrainingDetailAdapter by lazy(LazyThreadSafetyMode.NONE) { StartTrainingAdapter() }
-	private var currentPosition = -1
-
 
 	override fun initView() {
 		exerciseItem = intent.getSerializableExtra("exercise") as TrainingEntity
@@ -36,7 +37,13 @@ class StartTrainingAct : BaseActivity<ActivityStartTrainingBinding>() {
 		binding.btnBack.setOnClickListener {
 			finish()
 		}
-
+		binding.btnFinish.setOnClickListener {
+			val finishTrainingDialog = FinishTrainingDialog(this)
+			val completeSet = startTrainingDetailAdapter.getCountComplete()
+			val inCompleteSet = (startTrainingDetailAdapter.getSet()*exerciseItem.list.size)-completeSet
+			finishTrainingDialog.show(completeSet,inCompleteSet)
+			
+		}
 	}
 
 	override fun getContentView(): Int {
@@ -71,5 +78,6 @@ class StartTrainingAct : BaseActivity<ActivityStartTrainingBinding>() {
 		},1000)
 
 	}
+
 
 }

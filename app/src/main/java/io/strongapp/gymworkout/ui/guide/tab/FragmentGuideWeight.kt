@@ -44,7 +44,7 @@ class FragmentGuideWeight  : BaseFragment<FragmentGuideWeightBinding>() {
 		binding.btnNext.setOnClickListener {
 			(activity as? GuideAct)?.updateProgressBarAndNavigateNext()
 			guideViewModel.setWeight(binding.currentWeight.text.toString().toFloat())
-			guideViewModel.setBmi(binding.tvBMI.text.toString().toFloat())
+			guideViewModel.setBmi(binding.tvBMI.text.toString().replace(",", ".").toFloat())
 		}
 	}
 

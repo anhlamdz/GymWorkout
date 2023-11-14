@@ -28,7 +28,7 @@ class SearchFoodAct : BaseActivity<ActivitySearchFoodBinding>() {
 	)
 
 	override fun initView() {
-		val mealOptions = arrayOf("Bữa sáng", "Bữa trưa", "Bữa tối", "Ăn nhẹ")
+		val mealOptions = arrayOf("Bữa sáng", "Bữa trưa", "Bữa tối", "Đồ ăn nhẹ")
 		val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, mealOptions)
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 		binding.meal.adapter = adapter

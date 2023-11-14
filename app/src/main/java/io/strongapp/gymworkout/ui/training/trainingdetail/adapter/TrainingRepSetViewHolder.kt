@@ -15,6 +15,9 @@ class TrainingRepSetViewHolder(val binding: ItemRepSetBinding) : RecyclerView.Vi
 	fun bind(number: actualPracticeEntity) {
 		binding.numberRep.text = number.set.toString()
 		binding.rep.text = number.rep.toString().toEditable()
+
+
+
 	}
 
 	companion object {

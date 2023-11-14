@@ -65,7 +65,7 @@ class FragmentGuideGoalBody  : BaseFragment<FragmentGuideTargetBodyBinding>() {
 			binding.iLeft.visibility = View.INVISIBLE
 			binding.currentWeightIncrease.visibility = View.VISIBLE
 			val increase = ((targetWeight/currWeight)-1)*100
-			val roundedIncrease = "%.2f".format(increase).toFloat()
+			val roundedIncrease = "%.2f".format(increase).replace(",", ".").toFloat()
 			if(roundedIncrease > 5.0f && roundedIncrease<9.0f){
 				binding.tvComment.text = "Sweaty choice!"
 				binding.tvComment.setTextColor(resources.getColor(R.color.orange))
@@ -95,7 +95,7 @@ class FragmentGuideGoalBody  : BaseFragment<FragmentGuideTargetBodyBinding>() {
 			binding.description.visibility = View.VISIBLE
 			binding.currentWeightIncrease.visibility = View.INVISIBLE
 			val reduce = (1 - (targetWeight/currWeight))*100
-			val roundedReduce = "%.2f".format(reduce).toFloat()
+			val roundedReduce = "%.2f".format(reduce).replace(",", ".").toFloat()
 			if (roundedReduce < 10.0f){
 				binding.tvComment.text = "Mục tiêu hợp lý!"
 				binding.tvComment.setTextColor(resources.getColor(R.color.green))
@@ -140,12 +140,12 @@ class FragmentGuideGoalBody  : BaseFragment<FragmentGuideTargetBodyBinding>() {
 	fun timeReduce (targetWeight: Float): Float{
 		val caloReduce = (currWeight - targetWeight)*7700
 		val time = caloReduce / 500
-		return "%.2f".format(time).toFloat()
+		return "%.2f".format(time).replace(",", ".").toFloat()
 	}
 	fun timeIncrease(targetWeight: Float) : Float{
 		val caloIncrease = (targetWeight - currWeight)*7700
 		val time = caloIncrease / 500
-		return "%.2f".format(time).toFloat()
+		return "%.2f".format(time).replace(",", ".").toFloat()
 	}
 	fun getData() {
 		guideViewModel.name.observe(this){_name ->
