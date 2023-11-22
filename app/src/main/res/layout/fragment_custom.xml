@@ -77,7 +77,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <FrameLayout
-                android:id="@+id/btn_next"
+                android:id="@+id/btnAddEx"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="30dp"

@@ -1,12 +1,12 @@
 package io.strongapp.gymworkout.ui.food.searchfood.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import io.strongapp.gymworkout.data.database.FoodResponse
+import io.strongapp.gymworkout.databinding.ItemFoodAddBinding
 import io.strongapp.gymworkout.databinding.ItemFoodBinding
 
 object FoodResponseDiffCallback : DiffUtil.ItemCallback<FoodResponse>() {
@@ -19,10 +19,11 @@ object FoodResponseDiffCallback : DiffUtil.ItemCallback<FoodResponse>() {
     }
 
 }
-class SearchFoodAdapter : ListAdapter<FoodResponse, SearchFoodAdapter.FoodViewHolder>
+class SearchFoodAdapter(private val listener : ListenerInsertFoodToMeal) : ListAdapter<FoodResponse, SearchFoodAdapter.FoodViewHolder>
 	(FoodResponseDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FoodViewHolder {
-        val binding = ItemFoodBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemFoodAddBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FoodViewHolder(binding)
     }
 
@@ -30,18 +31,28 @@ class SearchFoodAdapter : ListAdapter<FoodResponse, SearchFoodAdapter.FoodViewHo
         return holder.bind(getItem(position))
     }
 
-    inner class FoodViewHolder(private val binding: ItemFoodBinding) :
+    inner class FoodViewHolder(private val binding: ItemFoodAddBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        init {
+        	binding.btnAddFood.setOnClickListener {
+                val position = adapterPosition
+                if (position != RecyclerView.NO_POSITION){
+                    val foodResponse = getItem(position)
+                    listener.onClick(foodResponse)
+                }
+            }
+        }
+
         fun bind(foodResponse: FoodResponse) {
             binding.run {
                 nameFood.text = foodResponse.name
-                Log.i("hahahaha", foodResponse.toString())
-//	            infoFood.text= foodResponse.calories.toString()+" g,"
+                infoFood.text= "${foodResponse.calories} cal, ${foodResponse.carbonHydrates} carb, ${foodResponse.fat} fat, ${foodResponse.protein} protein, ${foodResponse.weight} g"
             }
-//            "${foodResponse.calories} cal, ${foodResponse.carbonHydrates} carb, ${foodResponse.fat} fat, ${foodResponse.protein} protein, ${foodResponse.weight} g"
         }
     }
 
-
+    interface ListenerInsertFoodToMeal{
+        fun onClick(foodResponse: FoodResponse)
+    }
 
 }

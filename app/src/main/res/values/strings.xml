@@ -17,6 +17,9 @@
     <string name="search_hint">Tìm kiếm Bài tập</string>
     <string name="filter_title">Tất cả bài tập</string>
     <string name="btn_delete_filter">Được lọc</string>
+    <string name="btn_save">Lưu lại</string>
+    <string name="Filtered">Đã lọc</string>
+    <string name="btnClear">Bỏ lọc</string>
     <!-- Hồ sơ -->
     <string name="gender_title">"Giới tính của bạn là gì?"</string>
     <string name="male">Nam</string>
@@ -45,6 +48,7 @@
     <string name="title_custom">Tùy chỉnh</string>
     <string name="description_custom_1">Tạo bài tập tùy chỉnh đầu tiên của bạn</string>
     <string name="description_custom_2">Thiết lập kế hoạch riêng của bạn</string>
+    <string name="add_exercise">Thêm bài tập</string>
     <string name="btn_new">Mới</string>
     <!-- Thực phẩm -->
     <string name="title_food">Thực phẩm</string>

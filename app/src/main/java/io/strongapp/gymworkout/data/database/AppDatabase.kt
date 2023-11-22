@@ -7,20 +7,22 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import io.strongapp.gymworkout.data.database.daos.ExercisesDao
+import io.strongapp.gymworkout.data.database.daos.FoodNutritionDao
 import io.strongapp.gymworkout.data.database.entities.ExerciseGymEntity
 import io.strongapp.gymworkout.data.database.daos.UserDao
+import io.strongapp.gymworkout.data.database.entities.NutritionEntity
 
 import io.strongapp.gymworkout.data.database.entities.UserEntity
 
 @TypeConverters(TypeConverter::class)
 @Database(
-    entities = [ExerciseGymEntity::class, UserEntity::class],
+    entities = [ExerciseGymEntity::class, UserEntity::class,NutritionEntity::class],
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun useDao(): UserDao
     abstract fun exerciseDao(): ExercisesDao
-
+    abstract fun foodNutritionDao() : FoodNutritionDao
     companion object {
 
         @Volatile
