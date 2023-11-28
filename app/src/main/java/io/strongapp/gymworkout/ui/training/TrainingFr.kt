@@ -188,18 +188,18 @@ class TrainingFr : BaseFragment<FragmentTrainingBinding>() {
 	}
 	private fun filterExercise(exerciseResponse : List<ExerciseRepXSetEntity>) : List<TrainingEntity> {
 		val categories = listOf(
-			"Full Body Workout" to listFullBodyWorkout,
-			"Chest Workout" to listChestWorkout,
-			"Back Workout" to listBackWorkout,
-			"Arm Workout" to listArmWorkout,
-			"Shoulders Workout" to listShoulderWorkout,
-			"Lower Body Workout" to listLowerBodyWorkout,
-			"Stronglifts A" to listStrongLiftsA,
-			"Stronglifts B" to listStrongLiftsB,
-			"Upper Body Workout" to listUpperBodyWorkout,
-			"Abs Workout" to listAbsWorkout,
-			"V-Taper Workout" to listVtaperWorkout,
-			"Butt Workout" to listButtWorkout
+			"Tập Luyện Toàn Thân" to listFullBodyWorkout,
+			"Tập Luyện Cơ Ngực" to listChestWorkout,
+			"Tập Luyện Cơ Lưng" to listBackWorkout,
+			"Tập Luyện Cánh Tay" to listArmWorkout,
+			"Tập Luyện Cơ Vai" to listShoulderWorkout,
+			"Tập Luyện Thân Dưới" to listLowerBodyWorkout,
+			"Bài Tập Sức Mạnh A" to listStrongLiftsA,
+			"Bài Tập Sức Mạnh B" to listStrongLiftsB,
+			"Tập Luyện Thân Trên" to listUpperBodyWorkout,
+			"Tập Luyện Cơ Bụng" to listAbsWorkout,
+			"Tập Luyện Thân Hình Chữ V" to listVtaperWorkout,
+			"Tập Luyện Cơ Mông" to listButtWorkout
 		)
 
 		val trainingEntities = categories.map { (categoryName, filterList) ->
@@ -212,18 +212,18 @@ class TrainingFr : BaseFragment<FragmentTrainingBinding>() {
 	}
 	private fun getCategoryImage(categoryName: String): Int {
 		return when (categoryName) {
-			"Chest Workout" -> R.drawable.img_creator_partf_chest
-			"Full Body Workout" -> R.drawable.img_creator_partf_full
-			"Back Workout" -> R.drawable.img_creator_partf_back
-			"Arm Workout" -> R.drawable.img_creator_partf_arm
-			"Shoulders Workout" -> R.drawable.img_creator_partf_shoulder
-			"Lower Body Workout" -> R.drawable.img_creator_partf_lower
-			"Stronglifts A" -> R.color.orange // Use the actual resource here
-			"Stronglifts B" -> R.color.green // Use the actual resource here
-			"Upper Body Workout" -> R.drawable.img_creator_partf_upper
-			"Abs Workout" -> R.drawable.img_creator_partf_abs
-			"V-Taper Workout" -> R.drawable.img_creator_partf_vtaper
-			"Butt Workout" -> R.drawable.img_creator_partf_butt
+			"Tập Luyện Cơ Ngực" -> R.drawable.img_creator_partf_chest
+			"Tập Luyện Toàn Thân" -> R.drawable.img_creator_partf_full
+			"Tập Luyện Cơ Lưng" -> R.drawable.img_creator_partf_back
+			"Tập Luyện Cánh Tay" -> R.drawable.img_creator_partf_arm
+			"Tập Luyện Cơ Vai" -> R.drawable.img_creator_partf_shoulder
+			"Tập Luyện Thân Dưới" -> R.drawable.img_creator_partf_lower
+			"Bài Tập Sức Mạnh A" -> R.color.orange // Use the actual resource here
+			"Bài Tập Sức Mạnh B" -> R.color.green // Use the actual resource here
+			"Tập Luyện Thân Trên" -> R.drawable.img_creator_partf_upper
+			"Tập Luyện Cơ Bụng" -> R.drawable.img_creator_partf_abs
+			"Tập Luyện Thân Hình Chữ V" -> R.drawable.img_creator_partf_vtaper
+			"Tập Luyện Cơ Mông" -> R.drawable.img_creator_partf_butt
 			else -> 0
 		}
 	}
