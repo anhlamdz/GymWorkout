@@ -15,11 +15,7 @@ class FragmentGuideGoalBody  : BaseFragment<FragmentGuideTargetBodyBinding>() {
 	private lateinit var guideViewModel: GuideViewModel
 	private var currWeight: Float = 0f
 	private var tdee : Int = 0
-	private var gender : String = ""
-	private var goal : String = ""
-	private var name : String = ""
-	private var age : Int = 0
-	private var height : Float= 0f
+
 
 	override fun getLayoutRes(): Int {
 		return R.layout.fragment_guide_target_body
@@ -29,14 +25,12 @@ class FragmentGuideGoalBody  : BaseFragment<FragmentGuideTargetBodyBinding>() {
 	override fun initAction() {
 		binding.btnNext.setOnClickListener {
 			(activity as? GuideAct)?.updateProgressBarAndNavigateNext()
-			val newUser = UserEntity(0,name,age,gender,goal,height,currWeight,tdee,totalCalo(binding.TargetWeight.text.toString().toFloat()))
-				guideViewModel.insertUser(newUser)
+			guideViewModel.setTotalCalo(totalCalo(binding.TargetWeight.text.toString().toFloat()))
 		}
 	}
 
 	override fun initView() {
 		guideViewModel = ViewModelProvider(requireActivity())[GuideViewModel::class.java]
-		getData()
 		guideViewModel.weight.observe(viewLifecycleOwner){ _currWeight ->
 			this.currWeight = _currWeight
 			binding.tvWeight.initViewParam(_currWeight,30.0f,250.0f,1f)
@@ -147,26 +141,7 @@ class FragmentGuideGoalBody  : BaseFragment<FragmentGuideTargetBodyBinding>() {
 		val time = caloIncrease / 500
 		return "%.2f".format(time).replace(",", ".").toFloat()
 	}
-	fun getData() {
-		guideViewModel.name.observe(this){_name ->
-			this.name = _name
-		}
-		guideViewModel.age.observe(this){_age ->
-			this.age = _age
-		}
-		guideViewModel.height.observe(this){_height ->
-			this.height = _height
-		}
-		guideViewModel.goal.observe(this){_goal ->
-			this.goal = _goal
-		}
-		guideViewModel.gender.observe(this){_gender ->
-			this.gender = _gender
-		}
-		guideViewModel.tdee.observe(this){_tdee ->
-			this.tdee = _tdee
-		}
-	}
+
 	fun totalCalo(targetWeight: Float) : Int {
 		var calories = tdee
 		if (targetWeight > currWeight) {

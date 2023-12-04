@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.strongapp.gymworkout.R
 import io.strongapp.gymworkout.data.models.ExerciseRepXSetEntity
+import io.strongapp.gymworkout.data.models.WorkoutEndEntity
 import io.strongapp.gymworkout.data.models.actualPracticeEntity
 import io.strongapp.gymworkout.databinding.ItemStartTrainingBinding
 import io.strongapp.gymworkout.ui.training.trainingdetail.adapter.TrainingRepSetAdapter
@@ -29,9 +30,9 @@ object ExerciseResponseDiffCallback : DiffUtil.ItemCallback<ExerciseRepXSetEntit
 }
 
 class StartTrainingAdapter : ListAdapter<ExerciseRepXSetEntity, StartTrainingAdapter.ExercisesViewHolder>(ExerciseResponseDiffCallback){
-	private var countComplete : Int = 0
 	private val secondaryTextList = mutableListOf<String>()
 	private var set : Int = 0
+	private val listWorkout = mutableListOf<WorkoutEndEntity>()
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExercisesViewHolder {
 		val binding = ItemStartTrainingBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -64,14 +65,10 @@ class StartTrainingAdapter : ListAdapter<ExerciseRepXSetEntity, StartTrainingAda
 					itemView.context,
 					repList(exerciseResponse.set, exerciseResponse.rep),
 					binding.secondaryText, object : TrainingRepSetAdapter.CheckedCountListener{
-						override fun onCheckedItemsChanged(count: Int) {
-							if (count <= countComplete) {
-								countComplete += 1
-							}
-							else{
-								countComplete = count
-							}
+						override fun onCheckedItemsChanged(position: Int,isChecked: Boolean , kg: String, rep: String) {
+							updateWorkoutList(position,exerciseResponse.exerciseResponse.name,isChecked,kg,rep)
 						}
+
 					})
 				toDoRvc.layoutManager = LinearLayoutManager(itemView.context)
 				toDoRvc.adapter = adapter
@@ -103,12 +100,27 @@ class StartTrainingAdapter : ListAdapter<ExerciseRepXSetEntity, StartTrainingAda
 			}
 		}
 	}
-	fun getCountComplete() : Int {
-		return countComplete
+
+	fun getListComplete(): MutableList<WorkoutEndEntity> {
+		return listWorkout
 	}
 	fun getSet(): Int {
 		return set
 	}
+	fun updateWorkoutList(position: Int,name : String, isChecked: Boolean, kg: String, rep: String) {
+		if (isChecked) {
+			val end = WorkoutEndEntity(name, position + 1, kg.toInt(), rep.toInt())
+			listWorkout.add(end)
+		} else {
+			val removedEnd = listWorkout.find { it.name == name && it.set == (position+1) }
+			removedEnd?.let {
+				listWorkout.remove(it)
+			}
+		}
+	}
+
+
+
 	private fun repList(rep: Int, set: Int): List<actualPracticeEntity> {
 		val list = mutableListOf<actualPracticeEntity>()
 		for (i in 1..rep) {

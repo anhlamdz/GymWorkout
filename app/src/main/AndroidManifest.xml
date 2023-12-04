@@ -53,6 +53,14 @@
             android:exported="true"
             android:screenOrientation="portrait"/>
         <activity
+            android:name=".ui.custom.CustomTrainingAct"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.training.finish.FinishAct"
+            android:exported="true"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".ui.MainActivity"
             android:exported="true">
 <!--            <intent-filter>-->

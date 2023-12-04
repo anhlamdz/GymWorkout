@@ -138,10 +138,10 @@ class SearchFoodAct : BaseActivity<ActivitySearchFoodBinding>(), SearchFoodAdapt
 		)
 		try {
 			foodViewModel.insertFoodToMeal(food)
-			Toast.makeText(this, "Food inserted successfully",Toast.LENGTH_LONG)
+			Toast.makeText(this, "Food inserted successfully",Toast.LENGTH_LONG).show()
 		} catch (e: Exception) {
 			e.printStackTrace()
-			Toast.makeText(this, "Error inserting food: ${e.message}",Toast.LENGTH_LONG)
+			Toast.makeText(this, "Error inserting food: ${e.message}",Toast.LENGTH_LONG).show()
 		}
 	}
 }

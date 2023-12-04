@@ -99,11 +99,11 @@ class TrainingFr : BaseFragment<FragmentTrainingBinding>() {
 		"band assisted wheel rollerout"
 	)
 	private val listChestWorkout : List<String> = listOf(
+		"push-up",
 		"dumbbell incline alternate press",
 		"barbell bench press",
 		"cable middle fly",
-		"chest dip",
-		"push-up",
+		"chest dip"
 	)
 	private val listBackWorkout : List<String> = listOf(
 		"barbell bent over row",
@@ -206,7 +206,10 @@ class TrainingFr : BaseFragment<FragmentTrainingBinding>() {
 			val filteredExercises = exerciseResponse.filter { exercise ->
 				exercise.exerciseResponse.name in filterList
 			}
-			TrainingEntity(categoryName, filteredExercises.size, getCategoryImage(categoryName), filteredExercises)
+			val sortedList = filteredExercises.sortedBy { exercise ->
+				filterList.indexOf(exercise.exerciseResponse.name)
+			}
+			TrainingEntity(categoryName, filteredExercises.size, getCategoryImage(categoryName), sortedList)
 		}
 		return trainingEntities
 	}

@@ -13,10 +13,11 @@ import io.strongapp.gymworkout.data.database.daos.UserDao
 import io.strongapp.gymworkout.data.database.entities.NutritionEntity
 
 import io.strongapp.gymworkout.data.database.entities.UserEntity
+import io.strongapp.gymworkout.data.database.entities.WorkoutEntity
 
 @TypeConverters(TypeConverter::class)
 @Database(
-    entities = [ExerciseGymEntity::class, UserEntity::class,NutritionEntity::class],
+    entities = [ExerciseGymEntity::class, UserEntity::class,NutritionEntity::class,WorkoutEntity::class],
     version = 1
 )
 abstract class AppDatabase : RoomDatabase() {

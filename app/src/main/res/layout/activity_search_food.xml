@@ -15,7 +15,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
        >
-
         <ImageView
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
@@ -24,7 +23,7 @@
             android:padding="8dp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            />
+            app:tint="@color/white" />
         <Spinner
             android:id="@+id/meal"
             android:layout_width="wrap_content"
@@ -34,6 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/btn_back"
             android:textSize="21sp"
+           android:background="@drawable/bg_spinner"
             />
         <EditText
             android:id="@+id/search_edt"

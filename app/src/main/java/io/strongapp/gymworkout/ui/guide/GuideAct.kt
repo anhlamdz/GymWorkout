@@ -14,6 +14,7 @@ import io.strongapp.gymworkout.base.BaseActivity
 import io.strongapp.gymworkout.databinding.ActivityGuideBinding
 import io.strongapp.gymworkout.ui.MainActivity
 import io.strongapp.gymworkout.ui.exercises.viewmodel.ExercisesViewModel
+import io.strongapp.gymworkout.ui.guide.tab.FragmentGuideAccount
 import io.strongapp.gymworkout.ui.guide.tab.FragmentGuideAge
 import io.strongapp.gymworkout.ui.guide.tab.FragmentGuideGender
 import io.strongapp.gymworkout.ui.guide.tab.FragmentGuideGoal
@@ -34,10 +35,11 @@ class GuideAct : BaseActivity<ActivityGuideBinding>() {
 		FragmentGuideWeight(),
 		FragmentGuideOftenDoExercise(),
 		FragmentGuideGoalBody(),
+		FragmentGuideAccount()
 	)
 	private lateinit var exercisesViewModel: ExercisesViewModel
 	private lateinit var guideViewModel: GuideViewModel
-	private var currentProgress = 12.5
+	private var currentProgress = 11.1
 	private var currentItem = 0
 	private var currentFragment: Fragment? = null
 
@@ -74,7 +76,7 @@ class GuideAct : BaseActivity<ActivityGuideBinding>() {
 	override fun initAction() {
 		binding.btnBack.setOnClickListener {
 			if (currentProgress <= 100) {
-				currentProgress -= 12.5
+				currentProgress -= 11.11
 				binding.progressBar.progress = currentProgress.toInt()
 				Log.i("TAG", currentProgress.toString())
 				binding.viewPager.setCurrentItem(currentItem - 1, true)
@@ -84,7 +86,7 @@ class GuideAct : BaseActivity<ActivityGuideBinding>() {
 
 	fun updateProgressBarAndNavigateNext() {
 		if (currentProgress <= 100) {
-			currentProgress += 12.5
+			currentProgress += 11.11
 			binding.progressBar.progress = currentProgress.toInt()
 			if (currentProgress > 100) {
 				startActivity(MainActivity.getIntent(this))

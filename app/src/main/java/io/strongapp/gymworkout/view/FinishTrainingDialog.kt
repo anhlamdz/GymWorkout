@@ -12,7 +12,12 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import io.strongapp.gymworkout.R
 
-class FinishTrainingDialog(val context: Context) {
+class FinishTrainingDialog(val context: Context ,listener: FinishTrainingListener) {
+	private var finishTrainingListener: FinishTrainingListener? = null
+	init {
+		finishTrainingListener = listener
+	}
+
 	fun show(completedSet: Int, inCompletedSet: Int) {
 		val dialog = Dialog(context)
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -41,11 +46,16 @@ class FinishTrainingDialog(val context: Context) {
 		dialog.window?.attributes?.windowAnimations = R.style.CustomAlertDialog
 		dialog.window?.setGravity(Gravity.BOTTOM)
 
-		btnFinish.setOnClickListener { }
+		btnFinish.setOnClickListener {
+			finishTrainingListener?.onFinishButtonClicked()
+		}
 
 		btnCancer.setOnClickListener {
 			dialog.dismiss()
 		}
 
+	}
+	interface FinishTrainingListener {
+		fun onFinishButtonClicked()
 	}
 }

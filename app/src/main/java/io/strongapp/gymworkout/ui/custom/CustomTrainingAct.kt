@@ -10,7 +10,9 @@ class CustomTrainingAct :  BaseActivity<ActivityCustomNewTrainingBinding>()  {
 	}
 
 	override fun initAction() {
-
+		binding.btnBack.setOnClickListener {
+			finish()
+		}
 	}
 
 	override fun getContentView(): Int {
@@ -20,4 +22,6 @@ class CustomTrainingAct :  BaseActivity<ActivityCustomNewTrainingBinding>()  {
 	override fun bindViewModel() {
 
 	}
+
+
 }

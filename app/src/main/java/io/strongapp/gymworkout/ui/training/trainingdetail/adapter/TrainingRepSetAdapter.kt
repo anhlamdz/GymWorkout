@@ -39,7 +39,7 @@ class TrainingRepSetAdapter(
 
 	override fun onBindViewHolder(holder: TrainingRepSetViewHolder, position: Int) {
 		val exercise = list[position]
-		holder.bind(exercise)
+		holder.bind(position,exercise)
 
 
 	}
@@ -47,7 +47,7 @@ class TrainingRepSetAdapter(
 	inner class TrainingRepSetViewHolder(private val binding: ItemRepSetBinding) :
 		RecyclerView.ViewHolder(binding.root) {
 
-		fun bind(number: actualPracticeEntity) {
+		fun bind(position: Int,number: actualPracticeEntity) {
 			with(binding) {
 				numberRep.text = number.set.toString()
 				rep.text = number.rep.toString().toEditable()
@@ -58,14 +58,14 @@ class TrainingRepSetAdapter(
 					} else {
 						val updatedExercise = list[position]
 						updatedExercise.isChecked = !updatedExercise.isChecked
-						updateColors(updatedExercise.isChecked)
+						updateColors(updatedExercise.isChecked,position,weightSet.text.toString(),rep.text.toString())
 					}
 				}
 			}
 		}
 
 
-		private fun updateColors(isChecked: Boolean) {
+		private fun updateColors(isChecked: Boolean,position: Int,numKg: String, numRep: String) {
 			val colorRes = if (isChecked) R.color.white else R.color.black
 			with(binding) {
 				when (isChecked) {
@@ -97,13 +97,16 @@ class TrainingRepSetAdapter(
 				kg.setTextColor(itemView.context.getColor(colorRes))
 				rep.setTextColor(itemView.context.getColor(colorRes))
 				tvRep.setTextColor(itemView.context.getColor(colorRes))
+
+				checkedCountListener.onCheckedItemsChanged(position,isChecked,numKg,numRep)
+
 			}
 			textView.text = "${checkedCount.value}/${list.size} Xong"
 			if (checkedCount.value == list.size){
 				textView.setTextColor(itemView.resources.getColor(R.color.green_cccc))
 				playNotificationSound()
 			}
-		checkedCountListener.onCheckedItemsChanged(checkedCount.value?:1)
+
 		}
 
 	}
@@ -118,6 +121,6 @@ class TrainingRepSetAdapter(
 	fun String.toEditable(): Editable = Editable.Factory.getInstance().newEditable(this)
 
 	interface CheckedCountListener {
-		fun onCheckedItemsChanged(count : Int)
+		fun onCheckedItemsChanged(position: Int,isChecked: Boolean,kg : String,rep : String)
 	}
 }

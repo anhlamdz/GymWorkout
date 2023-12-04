@@ -116,7 +116,7 @@ class FilterExerciseDialog(
 
 	private fun createEquipmentList(): List<EquipmentEntity> {
 		return mutableListOf<EquipmentEntity>().apply {
-			arrayOf("band", "barbell", "body weight", "bosu ball", "cable", "dumbbell", "elliptical machine",
+			arrayOf("band", "barbell", "Trọng lượng cơ thể ", "bosu ball", "cable", "dumbbell", "elliptical machine",
 				"ez barbell", "hammer", "kettlebell", "leverage machine", "medicine ball", "olympic barbell",
 				"resistance band", "roller", "rope", "skierg machine", "sled machine", "smith sachine",
 				"stability ball", "stationary bike", "stepmill machine", "tire", "trap bar",

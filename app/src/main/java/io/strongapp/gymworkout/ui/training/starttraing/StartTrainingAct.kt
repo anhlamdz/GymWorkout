@@ -1,20 +1,22 @@
 package io.strongapp.gymworkout.ui.training.starttraing
 
+import android.content.Intent
 import android.os.Handler
-import android.util.Log
-import android.view.View
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import io.strongapp.gymworkout.R
 import io.strongapp.gymworkout.base.BaseActivity
 import io.strongapp.gymworkout.data.models.TrainingEntity
+import io.strongapp.gymworkout.data.models.WorkoutEndPointEntity
 import io.strongapp.gymworkout.databinding.ActivityStartTrainingBinding
+import io.strongapp.gymworkout.ui.training.finish.FinishAct
 import io.strongapp.gymworkout.ui.training.starttraing.adapter.StartTrainingAdapter
-import io.strongapp.gymworkout.ui.training.trainingdetail.adapter.TrainingRepSetAdapter
 import io.strongapp.gymworkout.view.FinishTrainingDialog
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 
-class StartTrainingAct : BaseActivity<ActivityStartTrainingBinding>() {
+class StartTrainingAct : BaseActivity<ActivityStartTrainingBinding>(),FinishTrainingDialog.FinishTrainingListener {
 	private lateinit var exerciseItem : TrainingEntity
 	private val startTrainingDetailAdapter by lazy(LazyThreadSafetyMode.NONE) { StartTrainingAdapter() }
 
@@ -38,11 +40,10 @@ class StartTrainingAct : BaseActivity<ActivityStartTrainingBinding>() {
 			finish()
 		}
 		binding.btnFinish.setOnClickListener {
-			val finishTrainingDialog = FinishTrainingDialog(this)
-			val completeSet = startTrainingDetailAdapter.getCountComplete()
+			val finishTrainingDialog = FinishTrainingDialog(this,this)
+			val completeSet = startTrainingDetailAdapter.getListComplete().size
 			val inCompleteSet = (startTrainingDetailAdapter.getSet()*exerciseItem.list.size)-completeSet
 			finishTrainingDialog.show(completeSet,inCompleteSet)
-			
 		}
 	}
 
@@ -79,5 +80,33 @@ class StartTrainingAct : BaseActivity<ActivityStartTrainingBinding>() {
 
 	}
 
+	override fun onFinishButtonClicked() {
+		val intent = Intent(this, FinishAct::class.java)
+
+		intent.putExtra("endpoint", endPoint())
+		startActivity(intent)
+
+	}
+
+	fun getCurrentDate(): Triple<Int, Int,Int> {
+		val currentDate = Calendar.getInstance()
+		val year = currentDate.get(Calendar.YEAR)
+		val month = currentDate.get(Calendar.MONTH) + 1  // Note: Months are zero-based
+		val day = currentDate.get(Calendar.DAY_OF_MONTH)
+		return Triple(year, month,day)
+	}
+
+	private fun endPoint() : WorkoutEndPointEntity{
+		val name = binding.name.text.toString()
+		val duration = binding.time.text.toString()
+		val (year,month, day) = getCurrentDate()
+		val date = "$day/$month/$year"
+		val currentTime = Calendar.getInstance().time
+		val timeFormatter = SimpleDateFormat("HH:mm", Locale.getDefault())
+		val timeCurrentFormatted = timeFormatter.format(currentTime)
+		var volume ="${startTrainingDetailAdapter.getListComplete().sumOf { it.kg }} kg"
+		val workoutEndPointEntity = WorkoutEndPointEntity(name,volume,duration,date,timeCurrentFormatted,startTrainingDetailAdapter.getListComplete())
+		return workoutEndPointEntity
+	}
 
 }

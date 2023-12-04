@@ -44,6 +44,7 @@
     <string name="title_training">Huấn luyện</string>
     <string name="btn_start">Bắt đầu</string>
     <string name="btn_logNextSet">Ghi chú Bộ tiếp theo</string>
+    <string name="title_login">Thiết lập tài khoản</string>
     <!-- Tùy chỉnh -->
     <string name="title_custom">Tùy chỉnh</string>
     <string name="description_custom_1">Tạo bài tập tùy chỉnh đầu tiên của bạn</string>
@@ -68,5 +69,8 @@
     <string name="completed_sets">Số sets hoàn thành</string>
     <string name="inCompleted_sets">Số sets chưa hoàn thành</string>
     <string name="btn_Cancel">Hủy</string>
+    <string name="title_finish">Bạn đã hoàn thành buổi tập của mình!</string>
+    <string name="title_volume">Khối lượng</string>
+    <string name="title_duration">Thời lượng</string>
 
 </resources>

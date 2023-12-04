@@ -20,7 +20,7 @@
 		private val _weight = MutableLiveData<Float>()
 		private val _bmi = MutableLiveData<Float>()
 		private val _tdee = MutableLiveData<Int>()
-
+		private val _totalCalo = MutableLiveData<Int>()
 
 		val weight : LiveData<Float>
 			get() = _weight
@@ -38,7 +38,8 @@
 			get() = _age
 		val tdee : LiveData<Int>
 			get() = _tdee
-
+		val totalCalo : LiveData<Int>
+			get() = _totalCalo
 		init {
 			val daoUser = AppDatabase.getDatabase(application).useDao()
 			userRepository = UserRepository(daoUser)
@@ -67,7 +68,9 @@
 		fun setTdee(tdee : Int){
 			_tdee.value = tdee
 		}
-
+		fun setTotalCalo(totalCalo : Int){
+			_totalCalo.value = totalCalo
+		}
 
 		fun insertUser(userEntity: UserEntity) = viewModelScope.launch {
 			userRepository.insertUser(userEntity)

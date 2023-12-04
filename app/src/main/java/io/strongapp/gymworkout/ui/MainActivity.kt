@@ -52,6 +52,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 //		}
 	}
 
+	override fun onBackPressed() {
+
+
+	}
 	private fun replaceFragment(fragment: Fragment, index: Int) {
 		val fragmentManager = supportFragmentManager
 		val fragmentTransaction = fragmentManager.beginTransaction()
