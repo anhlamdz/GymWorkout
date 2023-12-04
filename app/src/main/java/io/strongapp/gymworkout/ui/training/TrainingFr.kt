@@ -49,15 +49,15 @@ class TrainingFr : BaseFragment<FragmentTrainingBinding>() {
 
 
 	private val listStrongLiftsA : List<String> = listOf(
-			"barbell full squat",
-			"barbell bench press",
-			"barbell bent over row",
+		"barbell full squat",
+		"barbell bench press",
+		"barbell bent over row",
 	)
 	private val listStrongLiftsB : List<String> = listOf(
 		"barbell full squat",
 		"dumbbell standing overhead press",
 		"barbell deadlift"
-		)
+	)
 	private val listUpperBodyWorkout : List<String> = listOf(
 		"barbell bench press",
 		"barbell bent over row",
@@ -83,12 +83,12 @@ class TrainingFr : BaseFragment<FragmentTrainingBinding>() {
 		"dumbbell lateral raise"
 	)
 	private val listButtWorkout : List<String> = listOf(
-			"barbell lying lifting (on hip)",
-			"barbell sumo deadlift",
-			"cable pull through (with rope)",
-			"lever lying leg curl",
-			"lever seated hip adduction",
-		)
+		"barbell lying lifting (on hip)",
+		"barbell sumo deadlift",
+		"cable pull through (with rope)",
+		"lever lying leg curl",
+		"lever seated hip adduction",
+	)
 	private val listFullBodyWorkout : List<String> = listOf(
 		"farmers walk",
 		"barbell deadlift",
@@ -135,7 +135,7 @@ class TrainingFr : BaseFragment<FragmentTrainingBinding>() {
 		"lever seated hip adduction",
 		"smith reverse calf raises",
 
-	)
+		)
 
 	override fun getLayoutRes(): Int {
 		return R.layout.fragment_training
