@@ -15,7 +15,7 @@
             android:textSize="16sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="16dp"
+
             android:layout_marginStart="16dp"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rcv_training"

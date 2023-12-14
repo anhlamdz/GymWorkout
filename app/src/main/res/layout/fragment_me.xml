@@ -39,7 +39,7 @@
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
             <TextView
-                android:id="@+id/lang_setting"
+                android:id="@+id/profile_setting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -53,7 +53,7 @@
                 android:textSize="18dp" />
 
             <TextView
-                android:id="@+id/rate_setting"
+                android:id="@+id/notification_setting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp"
@@ -67,7 +67,7 @@
                 android:textSize="18dp" />
 
             <TextView
-                android:id="@+id/privacy_setting"
+                android:id="@+id/history_setting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_item_setting"

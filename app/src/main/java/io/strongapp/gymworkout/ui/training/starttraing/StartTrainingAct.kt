@@ -104,7 +104,7 @@ class StartTrainingAct : BaseActivity<ActivityStartTrainingBinding>(),FinishTrai
 		val currentTime = Calendar.getInstance().time
 		val timeFormatter = SimpleDateFormat("HH:mm", Locale.getDefault())
 		val timeCurrentFormatted = timeFormatter.format(currentTime)
-		var volume ="${startTrainingDetailAdapter.getListComplete().sumOf { it.kg }} kg"
+		val volume =startTrainingDetailAdapter.getListComplete().sumOf { it.kg }
 		val workoutEndPointEntity = WorkoutEndPointEntity(name,volume,duration,date,timeCurrentFormatted,startTrainingDetailAdapter.getListComplete())
 		return workoutEndPointEntity
 	}

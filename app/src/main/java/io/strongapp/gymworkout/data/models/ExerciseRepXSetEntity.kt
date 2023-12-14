@@ -6,5 +6,5 @@ import java.io.Serializable
 class ExerciseRepXSetEntity (
 	val exerciseResponse : ExerciseResponse,
 	val rep : Int,
-	val set : Int
+	var set : Int
 ): Serializable

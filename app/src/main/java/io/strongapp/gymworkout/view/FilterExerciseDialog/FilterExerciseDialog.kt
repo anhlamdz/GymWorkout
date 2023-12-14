@@ -2,6 +2,7 @@ package io.strongapp.gymworkout.view.FilterExerciseDialog
 
 import android.app.Dialog
 import android.content.Context
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.util.Log
@@ -12,7 +13,8 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import io.strongapp.gymworkout.R
 import io.strongapp.gymworkout.data.database.ExerciseResponse
 import io.strongapp.gymworkout.data.models.EquipmentEntity
@@ -26,8 +28,8 @@ class FilterExerciseDialog(
 	private val exerciseResponse: List<ExerciseResponse>
 ) : FocusAreaAdapter.OnItemSelectedListener, EquipmentAdapter.OnItemSelectedListener {
 
-	private val listFocusArea: List<FocusAreaEntity> = createFocusAreaList()
-	private val listEquipment: List<EquipmentEntity> = createEquipmentList()
+	private val listFocusArea: List<FocusAreaEntity> by lazy { createFocusAreaList() }
+	private val listEquipment: List<EquipmentEntity> by lazy { createEquipmentList() }
 	private lateinit var dialog: Dialog
 	private lateinit var focusAreaAdapter: FocusAreaAdapter
 	private lateinit var equipmentAdapter: EquipmentAdapter
@@ -38,26 +40,27 @@ class FilterExerciseDialog(
 	private var filteredList: List<ExerciseResponse> = emptyList()
 	private var filterAppliedListener: OnFilterAppliedListener? = null
 
-
-
 	fun show(exerciseList: List<ExerciseResponse>) {
+
+
 		val binding = DialogFilterExerciseBinding.inflate(LayoutInflater.from(context))
 		dialog = Dialog(context)
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
 		dialog.setContentView(binding.root)
 
-		dialog.window?.decorView?.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-				View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-				View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
-				View.SYSTEM_UI_FLAG_FULLSCREEN or
-				View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
-				View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+		dialog.window?.decorView?.systemUiVisibility =
+			(View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+					View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+					View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+					View.SYSTEM_UI_FLAG_FULLSCREEN or
+					View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
+					View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
 
 		val rcvFocusArea = binding.rcvFocusArea
 		val rcvEquipment = binding.rcvEquitment
 		val btnSave = binding.btnSave
 		val btnCancel = binding.btnCancel
-		 btnClear = binding.btnClear
+		btnClear = binding.btnClear
 		numberEx = binding.numberEx
 		title = binding.title
 
@@ -75,14 +78,21 @@ class FilterExerciseDialog(
 			adapter = equipmentAdapter
 		}
 
+
+
+
 		val selectedFocusAreas = focusAreaAdapter.getSelectedItems()
 		val selectedEquipment = equipmentAdapter.getSelectedItems()
 		applyFilters(selectedFocusAreas, selectedEquipment)
 
 		btnSave.setOnClickListener {
+
 			// Save the filtered list
-			filteredList = applyFilters(focusAreaAdapter.getSelectedItems(), equipmentAdapter.getSelectedItems())
-			Log.i("FilterExerciseDialog", "Dialog Filter ${filteredList.size}")
+			filteredList = applyFilters(
+				focusAreaAdapter.getSelectedItems(),
+				equipmentAdapter.getSelectedItems()
+			)
+
 			filterAppliedListener?.onFilterApplied(filteredList)
 			dialog.dismiss()
 		}
@@ -91,11 +101,10 @@ class FilterExerciseDialog(
 		}
 
 		btnClear.setOnClickListener {
-			focusAreaAdapter.clearSelections()
-			equipmentAdapter.clearSelections()
-
 			// Apply filters to update the exercise count
 			applyFilters(focusAreaAdapter.getSelectedItems(), equipmentAdapter.getSelectedItems())
+
+
 		}
 
 		dialog.show()
@@ -104,9 +113,11 @@ class FilterExerciseDialog(
 		dialog.window?.attributes?.windowAnimations = R.style.CustomAlertDialog
 		dialog.window?.setGravity(Gravity.BOTTOM)
 	}
+
 	fun setOnFilterAppliedListener(listener: OnFilterAppliedListener) {
 		this.filterAppliedListener = listener
 	}
+
 	private fun createFocusAreaList(): List<FocusAreaEntity> {
 		return mutableListOf<FocusAreaEntity>().apply {
 			arrayOf("lưng", "ngực", "bắp tay", "đùi", "eo", "cẳng chân", "cẳng tay", "vai", "cardio", "neck")
@@ -116,17 +127,19 @@ class FilterExerciseDialog(
 
 	private fun createEquipmentList(): List<EquipmentEntity> {
 		return mutableListOf<EquipmentEntity>().apply {
-			arrayOf("band", "barbell", "Trọng lượng cơ thể ", "bosu ball", "cable", "dumbbell", "elliptical machine",
-				"ez barbell", "hammer", "kettlebell", "leverage machine", "medicine ball", "olympic barbell",
-				"resistance band", "roller", "rope", "skierg machine", "sled machine", "smith sachine",
-				"stability ball", "stationary bike", "stepmill machine", "tire", "trap bar",
-				"upper body ergometer", "weighted", "wheel roller")
-				.forEach { add(EquipmentEntity(it)) }
+			arrayOf(
+				"band", "barbell", "trọng lượng cơ thể", "bosu ball", "cable", "dumbbell",
+				"elliptical machine", "ez barbell", "hammer", "kettlebell", "leverage machine",
+				"medicine ball", "olympic barbell", "resistance band", "roller", "rope",
+				"skierg machine", "sled machine", "smith sachine", "stability ball",
+				"stationary bike", "stepmill machine", "tire", "trap bar",
+				"upper body ergometer", "weighted", "wheel roller"
+			).forEach { add(EquipmentEntity(it)) }
 		}
 	}
 
-	override fun onItemSelected() {
 
+	override fun onItemSelected() {
 		applyFilters(focusAreaAdapter.getSelectedItems(), equipmentAdapter.getSelectedItems())
 	}
 
@@ -134,13 +147,18 @@ class FilterExerciseDialog(
 		applyFilters(focusAreaAdapter.getSelectedItems(), equipmentAdapter.getSelectedItems())
 	}
 
-	private fun applyFilters(selectedFocusAreas: List<FocusAreaEntity>, selectedEquipment: List<EquipmentEntity>): List<ExerciseResponse> {
+	private fun applyFilters(
+		selectedFocusAreas: List<FocusAreaEntity>,
+		selectedEquipment: List<EquipmentEntity>
+	): List<ExerciseResponse> {
 		filteredExerciseCount = 0
 		val filteredList = mutableListOf<ExerciseResponse>()
 
 		for (exercise in exerciseResponse) {
-			val focusAreaMatches = selectedFocusAreas.isEmpty() || selectedFocusAreas.any { it.isChecked && it.name == exercise.bodyPart }
-			val equipmentMatches = selectedEquipment.isEmpty() || selectedEquipment.any { it.isChecked && it.name == exercise.equipment }
+			val focusAreaMatches =
+				selectedFocusAreas.isEmpty() || selectedFocusAreas.any { it.isChecked && it.name == exercise.bodyPart }
+			val equipmentMatches =
+				selectedEquipment.isEmpty() || selectedEquipment.any { it.isChecked && it.name == exercise.equipment }
 
 			if (focusAreaMatches && equipmentMatches) {
 				filteredList.add(exercise)
@@ -148,15 +166,14 @@ class FilterExerciseDialog(
 			}
 		}
 		updateExerciseCountView()
-		btnClear.visibility = if (selectedFocusAreas.isNotEmpty() || selectedEquipment.isNotEmpty()) View.VISIBLE else View.GONE
-		if (btnClear.visibility == View.VISIBLE){
+		btnClear.visibility =
+			if (selectedFocusAreas.isNotEmpty() || selectedEquipment.isNotEmpty()) View.VISIBLE else View.GONE
+		if (btnClear.visibility == View.VISIBLE) {
 			title.visibility = View.GONE
-		}
-		else title.visibility = View.VISIBLE
+		} else title.visibility = View.VISIBLE
 
 		return filteredList
 	}
-
 
 	private fun updateExerciseCountView() {
 		numberEx.text = filteredExerciseCount.toString()
@@ -165,6 +182,4 @@ class FilterExerciseDialog(
 	interface OnFilterAppliedListener {
 		fun onFilterApplied(filteredList: List<ExerciseResponse>)
 	}
-
 }
-

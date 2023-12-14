@@ -7,6 +7,7 @@ import io.strongapp.gymworkout.data.database.entities.UserEntity
 import io.strongapp.gymworkout.databinding.FragmentLoginBinding
 import io.strongapp.gymworkout.ui.guide.GuideAct
 import io.strongapp.gymworkout.ui.guide.viewmodel.GuideViewModel
+import kotlin.random.Random
 
 
 class FragmentGuideAccount : BaseFragment<FragmentLoginBinding>() {
@@ -19,6 +20,7 @@ class FragmentGuideAccount : BaseFragment<FragmentLoginBinding>() {
 	private var tdee : Int = 0
 	private var totalCalo :Int = 0
 	private var weight :Float = 0f
+	private var targetWeight : Float = 0f
 	override fun getLayoutRes(): Int {
 		return R.layout.fragment_login
 	}
@@ -26,7 +28,8 @@ class FragmentGuideAccount : BaseFragment<FragmentLoginBinding>() {
 	override fun initAction() {
 		binding.btnNext.setOnClickListener {
 			(activity as? GuideAct)?.updateProgressBarAndNavigateNext()
-			val newUser = UserEntity(0,name,age,gender,goal,height,weight,tdee,totalCalo,binding.email.text.toString(),binding.pass.text.toString())
+			val id = Random.nextLong()
+			val newUser = UserEntity(id,name,age,gender,goal,height,weight,tdee,totalCalo,targetWeight,binding.email.text.toString(),binding.pass.text.toString())
 			guideViewModel.insertUser(newUser)
 		}
 	}
@@ -59,6 +62,9 @@ class FragmentGuideAccount : BaseFragment<FragmentLoginBinding>() {
 		}
 		guideViewModel.totalCalo.observe(this){_totalCalo ->
 			this.totalCalo = _totalCalo
+		}
+		guideViewModel.targetWeight.observe(this){_targetWeight ->
+			this.targetWeight = _targetWeight
 		}
 	}
 

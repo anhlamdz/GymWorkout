@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import io.strongapp.gymworkout.data.database.TypeConverter
 
-@Entity(tableName = "exercises_table")
+@Entity(tableName = "exercises_gym_table")
 @TypeConverters(TypeConverter::class)
 data class ExerciseGymEntity(
     @PrimaryKey(autoGenerate = true) val idEx: Long = 0,

@@ -1,5 +1,9 @@
 package io.strongapp.gymworkout.ui.food
 
+import android.content.res.ColorStateList
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,10 +14,7 @@ import io.strongapp.gymworkout.data.models.FoodMealEntity
 import io.strongapp.gymworkout.databinding.FragmentFoodBinding
 import io.strongapp.gymworkout.ui.food.adapter.FoodAdapter
 import io.strongapp.gymworkout.ui.food.viewmodel.FoodViewModel
-import io.strongapp.gymworkout.ui.me.viewmodel.UserViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import java.util.Calendar
 
 
@@ -49,20 +50,28 @@ class FoodFr : BaseFragment<FragmentFoodBinding>() {
 				val dinnerListTotalCalo = dinnerList.sumBy { it.calo }
 				val snackListTotalCalo = snackList.sumBy { it.calo }
 
-				val infoBreakfastList = "Carbs ${breakfastList.sumByDouble { it.carb}}g * Fat ${breakfastList.sumByDouble { it.fat}}g * Protein ${breakfastList.sumByDouble { it.protein}}g"
-				val infoLunchList = "Carbs ${lunchList.sumByDouble { it.carb}}g * Fat ${lunchList.sumByDouble { it.fat}}g * Protein ${lunchList.sumByDouble { it.protein}}g"
-				val infoDinnerList = "Carbs ${dinnerList.sumByDouble { it.carb}}g * Fat ${dinnerList.sumByDouble { it.fat}}g * Protein ${dinnerList.sumByDouble { it.protein}}g"
-				val infoSnackList = "Carbs ${snackList.sumByDouble { it.carb}}g * Fat ${snackList.sumByDouble { it.fat}}g * Protein ${snackList.sumByDouble { it.protein}}g"
+				val infoBreakfastList =
+					"Carbs ${breakfastList.sumByDouble { it.carb }}g * Fat ${breakfastList.sumByDouble { it.fat }}g * Protein ${breakfastList.sumByDouble { it.protein }}g"
+				val infoLunchList =
+					"Carbs ${lunchList.sumByDouble { it.carb }}g * Fat ${lunchList.sumByDouble { it.fat }}g * Protein ${lunchList.sumByDouble { it.protein }}g"
+				val infoDinnerList =
+					"Carbs ${dinnerList.sumByDouble { it.carb }}g * Fat ${dinnerList.sumByDouble { it.fat }}g * Protein ${dinnerList.sumByDouble { it.protein }}g"
+				val infoSnackList =
+					"Carbs ${snackList.sumByDouble { it.carb }}g * Fat ${snackList.sumByDouble { it.fat }}g * Protein ${snackList.sumByDouble { it.protein }}g"
 
 				eaten = breakfastListTotalCalo + lunchListListTotalCalo + dinnerListTotalCalo + snackListTotalCalo
 				binding.tvEaten.text = eaten.toString()
 				val listMeal: List<FoodMealEntity> = listOf(
-					FoodMealEntity("Bữa sáng",infoBreakfastList, breakfastListTotalCalo, breakfastList),
-					FoodMealEntity("Bữa trưa",infoLunchList, lunchListListTotalCalo, lunchList),
-					FoodMealEntity("Bữa tối",infoDinnerList, dinnerListTotalCalo, dinnerList),
-					FoodMealEntity("Đồ ăn nhẹ",infoSnackList, snackListTotalCalo, snackList),
+					FoodMealEntity("Bữa sáng", infoBreakfastList, breakfastListTotalCalo, breakfastList),
+					FoodMealEntity("Bữa trưa", infoLunchList, lunchListListTotalCalo, lunchList),
+					FoodMealEntity("Bữa tối", infoDinnerList, dinnerListTotalCalo, dinnerList),
+					FoodMealEntity("Đồ ăn nhẹ", infoSnackList, snackListTotalCalo, snackList),
 				)
-				val foodAdapter = FoodAdapter(requireContext(), listMeal)
+				val foodAdapter = FoodAdapter(requireContext(), listMeal,object : FoodAdapter.DeleteFood {
+					override fun delete(adapterPosition: Int, position: Int) {
+						deleteFood(adapterPosition,position)
+					}
+				})
 				binding.foodRcv.adapter = foodAdapter
 
 				lifecycleScope.launch {
@@ -71,6 +80,10 @@ class FoodFr : BaseFragment<FragmentFoodBinding>() {
 					binding.progressBarFood.max = user.tdee
 					binding.progressBarFood.progress = eaten
 					binding.remaining.text = (user.tdee - eaten).toString()
+
+
+
+
 				}
 			}
 		})
@@ -79,8 +92,20 @@ class FoodFr : BaseFragment<FragmentFoodBinding>() {
 	fun getCurrentDate(): Triple<Int, Int, Int> {
 		val currentDate = Calendar.getInstance()
 		val year = currentDate.get(Calendar.YEAR)
-		val month = currentDate.get(Calendar.MONTH) + 1  // Note: Months are zero-based
+		val month = currentDate.get(Calendar.MONTH) + 1
 		val day = currentDate.get(Calendar.DAY_OF_MONTH)
 		return Triple(year, month, day)
+	}
+
+
+
+	private fun deleteFood(adapterPosition: Int, position: Int) {
+		val foodAdapter = binding.foodRcv.adapter as FoodAdapter
+		val foodList = foodAdapter.getList()
+		val foodMealEntity = foodList[adapterPosition]
+		val foodInMealList = foodMealEntity.list
+		val nutritionEntityToDelete = foodInMealList[position]
+
+		foodViewModel.deleteFood(nutritionEntityToDelete)
 	}
 }

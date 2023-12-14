@@ -7,10 +7,19 @@
     <string name="personal_information">Thông tin cá nhân</string>
     <string name="notification_options">Tùy chọn thông báo</string>
     <string name="exercise_progress">Tiến độ tập luyện</string>
+    <string name="name">Tên</string>
+    <string name="age">Tuổi</string>
+    <string name="height">Chiều cao</string>
+    <string name="weight">Cân nặng</string>
+    <string name="gender">Giới tính</string>
+    <string name="target_weight">Cân nặng mong muốn</string>
+    <string name="goal">Mục tiêu</string>
+    <string name="title_workout_progress">Tiến độ tập luyện</string>
+    <string name="detail">Chi tiết</string>
     <!-- Bài tập -->
     <string name="btn_close">Đóng</string>
     <string name="title_exercises">Bài tập</string>
-    <string name="focus_area">Tập trung</string>
+    <string name="focus_area">Tập trung vào</string>
     <string name="equipment">Thiết bị</string>
     <string name="btn_done">Hoàn tất</string>
     <string name="instructions">Hướng dẫn</string>
@@ -45,12 +54,19 @@
     <string name="btn_start">Bắt đầu</string>
     <string name="btn_logNextSet">Ghi chú Bộ tiếp theo</string>
     <string name="title_login">Thiết lập tài khoản</string>
+    <string name="continue_with_your_existing_account">Tiếp tục với tài khoản của bạn</string>
     <!-- Tùy chỉnh -->
     <string name="title_custom">Tùy chỉnh</string>
     <string name="description_custom_1">Tạo bài tập tùy chỉnh đầu tiên của bạn</string>
     <string name="description_custom_2">Thiết lập kế hoạch riêng của bạn</string>
     <string name="add_exercise">Thêm bài tập</string>
+    <string name="add_a_set">Thêm 1 hiệp</string>
     <string name="btn_new">Mới</string>
+    <string name="edit_text_name">Nhập tên buổi tập</string>
+    <string name="title_close_dialog">Hủy những thay đổi chưa được lưu của bạn?</string>
+    <string name="delete">Xóa bài tập</string>
+    <string name="replace">Thay thế</string>
+    <string name="toast_replace_warning">Bài tập mới không thể trùng với bài tập cũ.</string>
     <!-- Thực phẩm -->
     <string name="title_food">Thực phẩm</string>
     <string name="title_calories">Lượng calo</string>

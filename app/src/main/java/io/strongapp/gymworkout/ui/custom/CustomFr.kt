@@ -4,8 +4,7 @@ import android.content.Intent
 import io.strongapp.gymworkout.R
 import io.strongapp.gymworkout.base.BaseFragment
 import io.strongapp.gymworkout.databinding.FragmentCustomBinding
-import io.strongapp.gymworkout.databinding.FragmentExercisesBinding
-import io.strongapp.gymworkout.ui.custom.CustomTrainingAct
+import io.strongapp.gymworkout.ui.custom.customtraining.CustomTrainingAct
 
 
 class CustomFr  : BaseFragment<FragmentCustomBinding>() {

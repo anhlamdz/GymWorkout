@@ -1,5 +1,6 @@
 package io.strongapp.gymworkout.view.FilterExerciseDialog.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,10 @@ import io.strongapp.gymworkout.data.models.FocusAreaEntity
 import io.strongapp.gymworkout.databinding.ItemFilterFocusAreaBinding
 
 
-class FocusAreaAdapter(private val list: List<FocusAreaEntity>, private val listener: OnItemSelectedListener) : RecyclerView.Adapter<FocusAreaAdapter.FocusAreaViewHolder>() {
+class FocusAreaAdapter(
+	private val list: List<FocusAreaEntity>,
+	private val listener: OnItemSelectedListener
+	) : RecyclerView.Adapter<FocusAreaAdapter.FocusAreaViewHolder>() {
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FocusAreaViewHolder {
 		val binding = ItemFilterFocusAreaBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -32,8 +36,6 @@ class FocusAreaAdapter(private val list: List<FocusAreaEntity>, private val list
 
 	inner class FocusAreaViewHolder(private val binding: ItemFilterFocusAreaBinding) :
 		RecyclerView.ViewHolder(binding.root){
-
-
 		fun bind(focusAreaEntity: FocusAreaEntity) {
 			binding.apply {
 				nameFocus.text = focusAreaEntity.name
@@ -44,16 +46,18 @@ class FocusAreaAdapter(private val list: List<FocusAreaEntity>, private val list
 					layout.setBackgroundResource(R.drawable.bg_layout_training_radios)
 					nameFocus.setTextColor(itemView.resources.getColor(R.color.black))
 				}
+				binding.executePendingBindings()
+
 			}
 		}
 	}
 	fun getSelectedItems(): List<FocusAreaEntity> {
 		return list.filter { it.isChecked }
 	}
-	fun clearSelections() {
-		list.forEach { it.isChecked = false }
-		notifyDataSetChanged()
-	}
+
+
+
+
 	interface OnItemSelectedListener {
 		fun onItemSelected()
 		fun onItemDeselected()

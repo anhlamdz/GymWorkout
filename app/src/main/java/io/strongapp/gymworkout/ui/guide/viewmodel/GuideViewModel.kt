@@ -21,6 +21,7 @@ class GuideViewModel(application: Application) : AndroidViewModel(application) {
 	private val _bmi = MutableLiveData<Float>()
 	private val _tdee = MutableLiveData<Int>()
 	private val _totalCalo = MutableLiveData<Int>()
+	private val _targetWeight = MutableLiveData<Float>()
 
 	val weight : LiveData<Float>
 		get() = _weight
@@ -40,6 +41,9 @@ class GuideViewModel(application: Application) : AndroidViewModel(application) {
 		get() = _tdee
 	val totalCalo : LiveData<Int>
 		get() = _totalCalo
+	val targetWeight : LiveData<Float>
+		get() = _targetWeight
+
 	init {
 		val daoUser = AppDatabase.getDatabase(application).useDao()
 		userRepository = UserRepository(daoUser)
@@ -70,6 +74,9 @@ class GuideViewModel(application: Application) : AndroidViewModel(application) {
 	}
 	fun setTotalCalo(totalCalo : Int){
 		_totalCalo.value = totalCalo
+	}
+	fun setTargetWeight(target : Float){
+		_targetWeight.value = target
 	}
 
 	fun insertUser(userEntity: UserEntity) = viewModelScope.launch {

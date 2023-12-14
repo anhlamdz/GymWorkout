@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/exercise_card_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -9,20 +10,43 @@
         android:paddingVertical="8dp"
         >
         <ImageView
+            android:id="@+id/item_imgCheck"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginVertical="16dp"
+            android:layout_marginEnd="6dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_lang_not_checked"
+            android:visibility="gone"
+            android:tag="false"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+             />
+        <ImageView
             android:id="@+id/imageEx"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:scaleType="centerCrop"
-            android:layout_marginStart="15dp"
+            android:layout_marginStart="6dp"
+            app:layout_constraintStart_toEndOf="@id/item_imgCheck"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:layout_weight="1"
-            android:orientation="vertical">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageEx"
+            app:layout_constraintEnd_toStartOf="@id/btnReplace"
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <TextView
                 android:id="@+id/text"
@@ -33,7 +57,7 @@
                 android:letterSpacing="0.0312"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toStartOf="@+id/exercises_number_of_completion"
+               app:layout_constraintTop_toTopOf="parent"
                 android:ellipsize="end"
                 android:lines="1"
                 android:text="Face pull"
@@ -52,17 +76,26 @@
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:lines="1"
-                android:text="chest"/>
-        </LinearLayout>
+                android:text="chest"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/exercises_number_of_completion"
-            style="?attr/textAppearanceBody1"
+            android:id="@+id/btnReplace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="end|center_vertical"
+            android:text="@string/replace"
+            android:textColor="@color/theme_color"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="16sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:drawableTop="@drawable/baseline_loop_24"
+            android:drawableTint="@color/theme_color"
             android:layout_marginEnd="16dp"
-            android:textColor="?android:attr/textColorSecondary" />
-    </LinearLayout>
+            android:visibility="gone"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

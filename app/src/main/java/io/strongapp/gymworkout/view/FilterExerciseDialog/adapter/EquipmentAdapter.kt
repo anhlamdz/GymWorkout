@@ -6,9 +6,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import io.strongapp.gymworkout.R
 import io.strongapp.gymworkout.data.models.EquipmentEntity
+import io.strongapp.gymworkout.data.models.FocusAreaEntity
 import io.strongapp.gymworkout.databinding.ItemFilterEquipmentBinding
 
-class EquipmentAdapter(private val list: List<EquipmentEntity>, private val listener: OnItemSelectedListener) : RecyclerView.Adapter<EquipmentAdapter.EquipmentViewHolder>() {
+class EquipmentAdapter(
+	private val list: List<EquipmentEntity>,
+	private val listener: OnItemSelectedListener,
+	) : RecyclerView.Adapter<EquipmentAdapter.EquipmentViewHolder>() {
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EquipmentViewHolder {
 		val binding = ItemFilterEquipmentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 		return EquipmentViewHolder(binding)
@@ -45,10 +49,6 @@ class EquipmentAdapter(private val list: List<EquipmentEntity>, private val list
 	}
 	fun getSelectedItems(): List<EquipmentEntity> {
 		return list.filter { it.isChecked }
-	}
-	fun clearSelections() {
-		list.forEach { it.isChecked = false }
-		notifyDataSetChanged()
 	}
 	interface OnItemSelectedListener {
 		fun onItemSelected()

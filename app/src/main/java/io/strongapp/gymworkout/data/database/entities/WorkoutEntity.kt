@@ -7,10 +7,11 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "workout_table")
 data class WorkoutEntity (
-	@PrimaryKey(autoGenerate = true) val id : Long,
-	@ColumnInfo("nameEx") val name : String,
-	@ColumnInfo("rep") val rep : Int,
+	@PrimaryKey
+	@ColumnInfo("id")val id : Long,
+	@ColumnInfo("title") val name : String,
 	@ColumnInfo("weight") val weight : Int,
 	@ColumnInfo("time") val time : String,
-	@ColumnInfo("date") val date : String
+	@ColumnInfo("date") val date : String,
+	@ColumnInfo("userid") val userId : Long
 )

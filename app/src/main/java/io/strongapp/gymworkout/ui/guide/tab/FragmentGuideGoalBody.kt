@@ -26,6 +26,7 @@ class FragmentGuideGoalBody  : BaseFragment<FragmentGuideTargetBodyBinding>() {
 		binding.btnNext.setOnClickListener {
 			(activity as? GuideAct)?.updateProgressBarAndNavigateNext()
 			guideViewModel.setTotalCalo(totalCalo(binding.TargetWeight.text.toString().toFloat()))
+			guideViewModel.setTargetWeight(binding.TargetWeight.text.toString().toFloat())
 		}
 	}
 
@@ -75,7 +76,7 @@ class FragmentGuideGoalBody  : BaseFragment<FragmentGuideTargetBodyBinding>() {
 
 			else if (roundedIncrease > 9.0f){
 				binding.tvComment.text = "Chú ý!"
-				binding.tvComment.setTextColor(resources.getColor(R.color.colorAccent))
+				binding.tvComment.setTextColor(resources.getColor(R.color.red))
 				binding.description.visibility = View.INVISIBLE
 				binding.descriptionComment.text= "Có vẻ như chỉ số BMI mục tiêu của bạn quá cao, điều này có thể gây ra một số vấn đề về sức khỏe..."
 			}
@@ -106,14 +107,14 @@ class FragmentGuideGoalBody  : BaseFragment<FragmentGuideTargetBodyBinding>() {
 			}
 			else if (roundedReduce > 16.0f && roundedReduce < 21.0f){
 				binding.tvComment.text = "Mục tiêu đầy thử thách!"
-				binding.tvComment.setTextColor(resources.getColor(R.color.colorAccent))
+				binding.tvComment.setTextColor(resources.getColor(R.color.red))
 				binding.descriptionComment.visibility = View.VISIBLE
 				binding.description.visibility = View.VISIBLE
 				binding.descriptionComment.text= "Bạn sẽ giảm $roundedReduce% trọng lượng cơ thể"
 			}
 			else if (roundedReduce > 21.0f){
 				binding.tvComment.text = "Chú ý!"
-				binding.tvComment.setTextColor(resources.getColor(R.color.colorAccent))
+				binding.tvComment.setTextColor(resources.getColor(R.color.red))
 				binding.descriptionComment.visibility = View.VISIBLE
 				binding.description.visibility = View.INVISIBLE
 				binding.descriptionComment.text= "Có vẻ như chỉ số BMI mục tiêu của bạn đang bị giảm quá mức, điều này có thể gây ra một số vấn đề về sức khỏe..."

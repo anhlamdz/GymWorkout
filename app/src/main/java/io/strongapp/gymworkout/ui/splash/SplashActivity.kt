@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import io.strongapp.gymworkout.R
 import io.strongapp.gymworkout.base.BaseActivity
 import io.strongapp.gymworkout.databinding.ActivitySplashBinding

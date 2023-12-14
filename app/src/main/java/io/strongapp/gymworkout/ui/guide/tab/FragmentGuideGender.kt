@@ -30,27 +30,27 @@ class FragmentGuideGender : BaseFragment<FragmentGuildGenderBinding>() {
 	override fun initView() {
 		guideViewModel = ViewModelProvider(requireActivity())[GuideViewModel::class.java]
 		binding.male.setOnClickListener {
-			selectedGender = "male"
+			selectedGender = "Nam"
 			updateGenderViews()
 
 		}
 		binding.female.setOnClickListener {
-			selectedGender = "female"
+			selectedGender = "Nữ"
 			updateGenderViews()
 
 		}
 	}
 	private fun updateGenderViews() {
-		binding.male.isSelected = selectedGender == "male"
-		binding.female.isSelected = selectedGender == "female"
-		binding.male.alpha = if (selectedGender == "male") 1f else 0.5f
-		binding.female.alpha = if (selectedGender == "female") 1f else 0.5f
+		binding.male.isSelected = selectedGender == "Nam"
+		binding.female.isSelected = selectedGender == "Nữ"
+		binding.male.alpha = if (selectedGender == "Nam") 1f else 0.5f
+		binding.female.alpha = if (selectedGender == "Nữ") 1f else 0.5f
 		binding.maleText.setTextColor(
-			if (selectedGender == "male") resources.getColor(R.color.black)
+			if (selectedGender == "Nam") resources.getColor(R.color.black)
 			else resources.getColor(R.color.dot_indicator)
 		)
 		binding.femaleText.setTextColor(
-			if (selectedGender == "female") resources.getColor(R.color.black)
+			if (selectedGender == "Nữ") resources.getColor(R.color.black)
 			else resources.getColor(R.color.dot_indicator)
 		)
 

@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import io.strongapp.gymworkout.R
 import io.strongapp.gymworkout.base.BaseFragment
 import io.strongapp.gymworkout.data.api.ApiViewModel
@@ -150,6 +151,7 @@ class TrainingFr : BaseFragment<FragmentTrainingBinding>() {
 		exercisesViewModel = ViewModelProvider(this)[ExercisesViewModel::class.java]
 		viewModel.getAllExercises()
 		observer()
+
 
 	}
 

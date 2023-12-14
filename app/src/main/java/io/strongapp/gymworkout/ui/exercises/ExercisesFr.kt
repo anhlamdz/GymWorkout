@@ -12,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import io.strongapp.gymworkout.R
 import io.strongapp.gymworkout.base.BaseFragment
 import io.strongapp.gymworkout.data.api.ApiViewModel
@@ -28,13 +29,11 @@ import io.strongapp.gymworkout.view.FilterExerciseDialog.FilterExerciseDialog
 
 
 class ExercisesFr : BaseFragment<FragmentExercisesBinding>() , FilterExerciseDialog.OnFilterAppliedListener {
-
-
     private lateinit var exerciseResponse : List<ExerciseResponse>
     private lateinit var exercisesViewModel: ExercisesViewModel
     private lateinit var edtSearch: EditText
     private lateinit var inputMethodManager: InputMethodManager
-    private val exercisesAdapter by lazy(LazyThreadSafetyMode.NONE) { ExercisesAdapter() }
+    private val exercisesAdapter by lazy(LazyThreadSafetyMode.NONE) { ExercisesAdapter(requireContext()) }
     private val viewModel by viewModels<ApiViewModel>(
         factoryProducer = {
             viewModelFactory {
@@ -80,6 +79,7 @@ class ExercisesFr : BaseFragment<FragmentExercisesBinding>() , FilterExerciseDia
             exercisesAdapter.submitList(exerciseResponse)
             binding.btnClear.visibility =  View.GONE
             binding.numberEx.text = exerciseResponse.size.toString()
+            Glide.get(requireContext()).clearMemory()
         }
 
     }
@@ -102,7 +102,7 @@ class ExercisesFr : BaseFragment<FragmentExercisesBinding>() , FilterExerciseDia
         viewModel.todoLiveData.observe(this) {
             when (it) {
                 is StateApi.Loading -> {
-
+                    Glide.get(requireContext()).clearMemory()
                 }
                 is StateApi.Success -> {
                     exerciseResponse = it.exerciseResponse

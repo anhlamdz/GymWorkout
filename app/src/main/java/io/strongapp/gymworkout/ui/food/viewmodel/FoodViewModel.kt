@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import io.strongapp.gymworkout.data.database.AppDatabase
 import io.strongapp.gymworkout.data.database.entities.NutritionEntity
 import io.strongapp.gymworkout.data.database.entities.UserEntity
+import io.strongapp.gymworkout.data.database.entities.WorkoutEntity
 import io.strongapp.gymworkout.data.repository.NutritionRepository
 import io.strongapp.gymworkout.data.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
@@ -40,6 +41,11 @@ class FoodViewModel(application: Application) : AndroidViewModel(application) {
 	fun insertFoodToMeal(nutritionEntity: NutritionEntity) = viewModelScope.launch {
 		withContext(Dispatchers.IO) {
 			nutritionRepository.insertFood(nutritionEntity)
+		}
+	}
+	fun deleteFood(nutritionEntity: NutritionEntity) {
+		viewModelScope.launch {
+			nutritionRepository.deleteFood(nutritionEntity)
 		}
 	}
 

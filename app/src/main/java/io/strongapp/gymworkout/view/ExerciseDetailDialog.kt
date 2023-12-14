@@ -1,25 +1,33 @@
 package io.strongapp.gymworkout.view
 
+
 import android.app.Dialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.net.Uri
+import android.graphics.drawable.Drawable
+import android.os.Build.VERSION.SDK_INT
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
-import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
+import coil.ImageLoader
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
+import coil.load
+
 import io.strongapp.gymworkout.R
 import io.strongapp.gymworkout.data.database.ExerciseResponse
 import io.strongapp.gymworkout.ui.exercises.adpter.InstructionsAdapter
+import coil.size.Scale
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 
 class ExerciseDetailDialog(private val context: Context) {
 
@@ -46,12 +54,15 @@ class ExerciseDetailDialog(private val context: Context) {
 		focusArea.text = exerciseResponse.bodyPart.capitalize()
 		equipment.text = exerciseResponse.equipment.capitalize()
 
-		val uri = Uri.parse(exerciseResponse.gifUrl)
+
 		Glide.with(context)
 			.asGif()
-			.load(uri)
+			.load(exerciseResponse.gifUrl)
 			.diskCacheStrategy(DiskCacheStrategy.NONE)
 			.into(gifImage)
+
+
+
 
 		listItem.layoutManager = LinearLayoutManager(context)
 		listItem.isNestedScrollingEnabled = false
@@ -68,4 +79,5 @@ class ExerciseDetailDialog(private val context: Context) {
 			dialog.dismiss()
 		}
 	}
+
 }
