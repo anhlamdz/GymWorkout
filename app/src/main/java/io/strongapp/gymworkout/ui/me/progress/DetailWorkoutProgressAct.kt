@@ -1,5 +1,7 @@
 package io.strongapp.gymworkout.ui.me.progress
 
+import android.app.Activity
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +17,8 @@ import io.strongapp.gymworkout.ui.training.finish.adapter.FinishAdapter
 class DetailWorkoutProgressAct : BaseActivity<ActivityDetailWorkoutProgressBinding>() {
 	private lateinit var userViewModel: UserViewModel
 	private lateinit var workout: WorkoutEntity
+
+
 	override fun initView() {
 		userViewModel = ViewModelProvider(this)[UserViewModel::class.java]
 		val idWorkout = intent.getLongExtra("idWorkout",0)
@@ -47,6 +51,8 @@ class DetailWorkoutProgressAct : BaseActivity<ActivityDetailWorkoutProgressBindi
 		}
 		binding.btnDelete.setOnClickListener {
 			userViewModel.deleteWorkout(workout)
+			val resultIntent = Intent()
+			setResult(Activity.RESULT_OK, resultIntent)
 			finish()
 		}
 	}
@@ -60,7 +66,6 @@ class DetailWorkoutProgressAct : BaseActivity<ActivityDetailWorkoutProgressBindi
 	}
 	fun filterDistinctNames(training: List<WorkoutEndEntity>): List<WorkoutEndEntity> {
 		val nameCountMap = mutableMapOf<String, Int>()
-
 		for (ex in training) {
 			val count = nameCountMap.getOrDefault(ex.name, 0)
 			nameCountMap[ex.name] = count + 1

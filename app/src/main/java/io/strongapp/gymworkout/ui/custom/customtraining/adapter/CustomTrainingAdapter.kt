@@ -1,34 +1,27 @@
 package io.strongapp.gymworkout.ui.custom.customtraining.adapter
 
 import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import io.strongapp.gymworkout.R
-import io.strongapp.gymworkout.data.database.ExerciseResponse
-import io.strongapp.gymworkout.data.models.ExerciseRepXSetEntity
-import io.strongapp.gymworkout.data.models.actualPracticeEntity
+import io.strongapp.gymworkout.data.models.CustomRepSetEntity
+import io.strongapp.gymworkout.data.models.CustomTrainingEntity
 import io.strongapp.gymworkout.databinding.ItemCustomTrainingBinding
-import io.strongapp.gymworkout.ui.custom.AddExerciseAct.AddExerciseAct
-import io.strongapp.gymworkout.ui.custom.AddExerciseAct.adapter.AddExerciseAdapter
-import io.strongapp.gymworkout.ui.custom.customtraining.CustomTrainingAct
 import io.strongapp.gymworkout.view.ExerciseDetailDialog
 
-object ExerciseResponseDiffCallback : DiffUtil.ItemCallback<ExerciseRepXSetEntity>() {
-	override fun areItemsTheSame(oldItem: ExerciseRepXSetEntity, newItem: ExerciseRepXSetEntity): Boolean {
+object ExerciseResponseDiffCallback : DiffUtil.ItemCallback<CustomTrainingEntity>() {
+	override fun areItemsTheSame(oldItem: CustomTrainingEntity, newItem: CustomTrainingEntity): Boolean {
 		return oldItem.exerciseResponse.id == newItem.exerciseResponse.id
 	}
 
-	override fun areContentsTheSame(oldItem: ExerciseRepXSetEntity, newItem: ExerciseRepXSetEntity): Boolean {
+	override fun areContentsTheSame(oldItem: CustomTrainingEntity, newItem: CustomTrainingEntity): Boolean {
 		return oldItem.exerciseResponse == newItem.exerciseResponse
 	}
 }
@@ -36,9 +29,10 @@ object ExerciseResponseDiffCallback : DiffUtil.ItemCallback<ExerciseRepXSetEntit
 class CustomTrainingAdapter(
 	val context: Context,
 	private val listener: OnReplaceItem
-) : ListAdapter<ExerciseRepXSetEntity, CustomTrainingAdapter.ExercisesViewHolder>(
+) : ListAdapter<CustomTrainingEntity, CustomTrainingAdapter.ExercisesViewHolder>(
 	ExerciseResponseDiffCallback
 ) {
+
 
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExercisesViewHolder {
 		val binding =
@@ -50,10 +44,10 @@ class CustomTrainingAdapter(
 		holder.bind(getItem(position), position)
 	}
 
-	inner class ExercisesViewHolder(private val binding: ItemCustomTrainingBinding) :
+	inner class ExercisesViewHolder(val binding: ItemCustomTrainingBinding) :
 		RecyclerView.ViewHolder(binding.root) {
 
-		fun bind(exerciseResponse: ExerciseRepXSetEntity, position: Int) {
+		fun bind(exerciseResponse: CustomTrainingEntity, position: Int) {
 			binding.run {
 				text.text = exerciseResponse.exerciseResponse.name
 
@@ -62,12 +56,18 @@ class CustomTrainingAdapter(
 					.load(Uri.parse(exerciseResponse.exerciseResponse.gifUrl))
 					.into(imageEx)
 
-				val adapter = CustomTrainingRepSepAdapter(
-					context,
-					repList(exerciseResponse.set, exerciseResponse.rep), secondaryText, btnAddSet
-				)
-				toDoRvc.layoutManager = LinearLayoutManager(context)
-				toDoRvc.adapter = adapter
+
+				val	customTrainingRepSetAdapter = CustomTrainingRepSetAdapter(
+						context,
+						exerciseResponse.list,
+						secondaryText,
+						btnAddSet
+
+					)
+					toDoRvc.layoutManager = LinearLayoutManager(context)
+					toDoRvc.adapter = customTrainingRepSetAdapter
+
+
 
 				binding.btnOption.setOnClickListener {
 					toggleDropOptionVisibility()
@@ -80,6 +80,7 @@ class CustomTrainingAdapter(
 					}
 					false
 				}
+
 
 				binding.btnDelete.setOnClickListener {
 					val adapterPosition = adapterPosition
@@ -105,8 +106,8 @@ class CustomTrainingAdapter(
 			binding.btnMore.setOnClickListener {
 				openToDoRcv(position)
 			}
-		}
 
+		}
 		private fun toggleDropOptionVisibility() {
 			if (binding.dropOption.visibility == View.GONE) {
 				binding.dropOption.visibility = View.VISIBLE
@@ -127,16 +128,11 @@ class CustomTrainingAdapter(
 				}
 			}
 		}
+
 	}
 
-	private fun repList(rep: Int, set: Int): List<actualPracticeEntity> {
-		val list = mutableListOf<actualPracticeEntity>()
-		for (i in 1..rep) {
-			list.add(actualPracticeEntity(i, false, R.drawable.ic_lang_not_checked, set))
-		}
-		return list
-	}
+
 	interface OnReplaceItem{
-		fun onClickReplaceListener(exerciseResponse: ExerciseRepXSetEntity,position: Int)
+		fun onClickReplaceListener(exerciseResponse: CustomTrainingEntity,position: Int)
 	}
 }

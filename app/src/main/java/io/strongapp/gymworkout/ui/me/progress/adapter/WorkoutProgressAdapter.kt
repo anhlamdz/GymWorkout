@@ -27,7 +27,7 @@ object WorkoutProgressDiffCallback : DiffUtil.ItemCallback<WorkoutEntity>() {
 
 }
 
-class WorkoutProgressAdapter : ListAdapter<WorkoutEntity, WorkoutProgressAdapter.WorkoutViewHolder>
+class WorkoutProgressAdapter(private val itemClickListener: WorkoutItemClickListener)  : ListAdapter<WorkoutEntity, WorkoutProgressAdapter.WorkoutViewHolder>
 	(WorkoutProgressDiffCallback) {
 	override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WorkoutViewHolder {
 		val binding =
@@ -51,9 +51,7 @@ class WorkoutProgressAdapter : ListAdapter<WorkoutEntity, WorkoutProgressAdapter
 
 			}
 			itemView.setOnClickListener {
-				val intent = Intent(itemView.context, DetailWorkoutProgressAct::class.java)
-				intent.putExtra("idWorkout",workout.id)
-				itemView.context.startActivity(intent)
+				itemClickListener.onWorkoutItemClicked(workout.id)
 			}
 		}
 	}
@@ -63,5 +61,7 @@ class WorkoutProgressAdapter : ListAdapter<WorkoutEntity, WorkoutProgressAdapter
 		text = text.toString().capitalize()
 	}
 
-
+	interface WorkoutItemClickListener {
+		fun onWorkoutItemClicked(workoutId: Long)
+	}
 }

@@ -62,7 +62,7 @@
             android:id="@+id/btnViewAll"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="View all"
+            android:text="@string/view_all"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:textColor="@color/theme_color"

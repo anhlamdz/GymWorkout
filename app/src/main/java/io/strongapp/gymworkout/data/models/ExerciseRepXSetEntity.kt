@@ -7,4 +7,4 @@ class ExerciseRepXSetEntity (
 	val exerciseResponse : ExerciseResponse,
 	val rep : Int,
 	var set : Int
-): Serializable
+):Serializable

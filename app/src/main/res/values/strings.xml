@@ -16,6 +16,11 @@
     <string name="goal">Mục tiêu</string>
     <string name="title_workout_progress">Tiến độ tập luyện</string>
     <string name="detail">Chi tiết</string>
+    <string name="marco_setting">Cập nhật marco dinh dưỡng</string>
+    <string name="marco_title">Thành phần dinh dưỡng</string>
+    <string name="tv_protein">Chất đạm</string>
+    <string name="tv_fat">Chất béo</string>
+    <string name="logout">Đăng xuất</string>
     <!-- Bài tập -->
     <string name="btn_close">Đóng</string>
     <string name="title_exercises">Bài tập</string>
@@ -55,6 +60,10 @@
     <string name="btn_logNextSet">Ghi chú Bộ tiếp theo</string>
     <string name="title_login">Thiết lập tài khoản</string>
     <string name="continue_with_your_existing_account">Tiếp tục với tài khoản của bạn</string>
+    <string name="max_length">Tối đa 15 kí tự</string>
+    <string name="warning_account">Vui lòng kiểm tra lại tài khoản và mật khẩu của bạn</string>
+    <string name="sign_success">Đăng ký thành công</string>
+    <string name="sign_failed">Đăng ký thất bại</string>
     <!-- Tùy chỉnh -->
     <string name="title_custom">Tùy chỉnh</string>
     <string name="description_custom_1">Tạo bài tập tùy chỉnh đầu tiên của bạn</string>
@@ -67,6 +76,9 @@
     <string name="delete">Xóa bài tập</string>
     <string name="replace">Thay thế</string>
     <string name="toast_replace_warning">Bài tập mới không thể trùng với bài tập cũ.</string>
+    <string name="btn_edit">Chỉnh sửa</string>
+    <string name="btn_rename">Đổi tên</string>
+    <string name="delete_custom_training">Xóa</string>
     <!-- Thực phẩm -->
     <string name="title_food">Thực phẩm</string>
     <string name="title_calories">Lượng calo</string>
@@ -88,5 +100,10 @@
     <string name="title_finish">Bạn đã hoàn thành buổi tập của mình!</string>
     <string name="title_volume">Khối lượng</string>
     <string name="title_duration">Thời lượng</string>
+    <string name="view_all">Xem tất cả</string>
+    <!-- Đăng nhập -->
+    <string name="login">Đăng nhập tài khoản của bạn</string>
+    <string name="btn_login">Đăng nhập</string>
+    <string name="is_empty">Không được để tài khoản hoặc mật khẩu để trống</string>
 
 </resources>

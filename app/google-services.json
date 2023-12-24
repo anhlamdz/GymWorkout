@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "487602852202",
+    "firebase_url": "https://gym-workout-d75d2-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "gym-workout-d75d2",
+    "storage_bucket": "gym-workout-d75d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:487602852202:android:b7909ee76302c5eac05513",
+        "android_client_info": {
+          "package_name": "io.strongapp.gymworkout"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4HH1mqA0um519dvNq7hfcMjT7bQ0BWGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

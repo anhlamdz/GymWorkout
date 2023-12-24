@@ -7,16 +7,16 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "user_table")
 data class UserEntity (
 	@PrimaryKey
-	@ColumnInfo("id")val id : Long = 0,
-	@ColumnInfo(name = "name") val name : String,
-	@ColumnInfo(name = "age") val age : Int,
-	@ColumnInfo(name = "gender") val gender : String,
-	@ColumnInfo(name = "goal") val goal : String,
-	@ColumnInfo(name = "height") val height : Float,
-	@ColumnInfo(name = "weight") val weight : Float,
-	@ColumnInfo(name = "tdee") val tdee: Int,
-	@ColumnInfo(name = "total_calo") val totalCalorie : Int,
-	@ColumnInfo(name = "targetWeight") val targetWeight : Float,
-	@ColumnInfo(name = "email") val email: String,
-	@ColumnInfo(name = "password") val password: String
+	@ColumnInfo("id")val id : String ="" ,
+	@ColumnInfo(name = "name") val name : String ="",
+	@ColumnInfo(name = "age") val age : Int=0,
+	@ColumnInfo(name = "gender") val gender : String="",
+	@ColumnInfo(name = "goal") val goal : String ="",
+	@ColumnInfo(name = "height") val height : Float=0f,
+	@ColumnInfo(name = "weight") val weight : Float=0f,
+	@ColumnInfo(name = "tdee") val tdee: Int =0 ,
+	@ColumnInfo(name = "total_calo") val totalCalorie : Int = 0,
+	@ColumnInfo(name = "targetWeight") val targetWeight : Float=0f,
+	@ColumnInfo(name = "email") val email: String="",
+	@ColumnInfo(name = "password") val password: String=""
 )

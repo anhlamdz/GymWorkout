@@ -9,6 +9,7 @@ import io.strongapp.gymworkout.data.database.entities.ExerciseGymEntity
 import io.strongapp.gymworkout.data.database.entities.UserEntity
 import io.strongapp.gymworkout.data.database.entities.WorkoutAndExercise
 import io.strongapp.gymworkout.data.database.entities.WorkoutEntity
+import io.strongapp.gymworkout.data.repository.ClearRepository
 import io.strongapp.gymworkout.data.repository.ExerciseInWorkoutRepository
 import io.strongapp.gymworkout.data.repository.ExercisesRepository
 import io.strongapp.gymworkout.data.repository.UserRepository
@@ -21,11 +22,15 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 	val userRepository : UserRepository
 	val exerciseInWorkoutRepository : ExerciseInWorkoutRepository
 	val workoutRepository : WorkoutRepository
+	val clearRepository : ClearRepository
 	val workoutEntity : LiveData<List<WorkoutEntity>>
 	init {
 		val dao = AppDatabase.getDatabase(application).useDao()
 		val exerciseInWorkoutDao = AppDatabase.getDatabase(application).exerciseInWorkoutDao()
 		val workoutDao = AppDatabase.getDatabase(application).workoutDao()
+		val clearDataDao = AppDatabase.getDatabase(application).clearDataDao()
+
+		clearRepository = ClearRepository(clearDataDao)
 		workoutRepository = WorkoutRepository(workoutDao)
 		userRepository = UserRepository(dao)
 		exerciseInWorkoutRepository = ExerciseInWorkoutRepository(exerciseInWorkoutDao)
@@ -44,6 +49,11 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 	fun deleteWorkout(workoutEntity: WorkoutEntity) {
 		viewModelScope.launch {
 			workoutRepository.deleteWorkout(workoutEntity)
+		}
+	}
+	fun clearData() {
+		viewModelScope.launch {
+			clearRepository.clearAllData()
 		}
 	}
 }

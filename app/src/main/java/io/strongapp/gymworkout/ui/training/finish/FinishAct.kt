@@ -1,12 +1,19 @@
 package io.strongapp.gymworkout.ui.training.finish
 
 import android.content.Intent
+import android.os.Handler
 import android.util.Log
+import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.auth
 import io.strongapp.gymworkout.R
 import io.strongapp.gymworkout.base.BaseActivity
+import io.strongapp.gymworkout.data.database.entities.CustomEntity
 import io.strongapp.gymworkout.data.database.entities.ExerciseEntity
 import io.strongapp.gymworkout.data.database.entities.WorkoutEntity
 import io.strongapp.gymworkout.data.models.WorkoutEndEntity
@@ -15,14 +22,16 @@ import io.strongapp.gymworkout.databinding.ActivityFinishTrainingBinding
 import io.strongapp.gymworkout.ui.MainActivity
 import io.strongapp.gymworkout.ui.training.finish.adapter.FinishAdapter
 import io.strongapp.gymworkout.ui.training.viewmodel.TrainingViewModel
+import io.strongapp.gymworkout.view.NotificationFinish
 import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class FinishAct : BaseActivity<ActivityFinishTrainingBinding>() {
 	private lateinit var exerciseItem: WorkoutEndPointEntity
 	private lateinit var trainingViewModel: TrainingViewModel
-
+	private lateinit var auth: FirebaseAuth
 	override fun initView() {
+		auth = Firebase.auth
 		trainingViewModel = ViewModelProvider(this)[TrainingViewModel::class.java]
 		exerciseItem = intent.getSerializableExtra("endpoint") as WorkoutEndPointEntity
 		binding.nameWorkout.text = exerciseItem.name
@@ -36,6 +45,11 @@ class FinishAct : BaseActivity<ActivityFinishTrainingBinding>() {
 		binding.rcvEx.adapter = finishAdapter
 
 
+		val description = "Bạn vừa hoàn thành xong buổi ${exerciseItem.name} hãy nghỉ ngơi để cơ bắp có thể phục hồi và đáp ứng tốt cho buổi tập tiếp theo."
+		Handler().postDelayed({
+			notificationSetup(description)
+		},2000)
+
 	}
 
 	override fun initAction() {
@@ -46,16 +60,17 @@ class FinishAct : BaseActivity<ActivityFinishTrainingBinding>() {
 			val duration = binding.duration.text.toString()
 			val date = binding.date.text.toString()
 
-			lifecycleScope.launch {
-				val userId = trainingViewModel.getInfo().id
-				val newWorkout = WorkoutEntity(idWorkout, name, volume, duration, date,userId)
+			var currentUser = auth.getCurrentUser()
+			if (currentUser != null){
+				val newWorkout = WorkoutEntity(idWorkout, name, volume, duration, date,currentUser.uid)
 				trainingViewModel.saveWorkout(newWorkout)
+			}
+
 
 
 				val listExerciseInWorkout :List<ExerciseEntity> = exerciseItem.list.toExerciseEntityList(idWorkout)
 				trainingViewModel.saveListExercise(listExerciseInWorkout)
 
-			}
 
 
 
@@ -96,5 +111,19 @@ class FinishAct : BaseActivity<ActivityFinishTrainingBinding>() {
 				idWorkout = idWorkout
 			)
 		}
+	}
+	fun notificationSetup(title : String){
+		val animationDown = AnimationUtils.loadAnimation(this,R.anim.anim_slide_down)
+		val animationUp = AnimationUtils.loadAnimation(this,R.anim.anim_slide_up)
+		binding.notificationBackground.startAnimation(animationDown)
+		binding.tvNotification.text = title
+		binding.notificationBackground.visibility = View.VISIBLE
+
+		Handler().postDelayed({
+			binding.notificationBackground.startAnimation(animationUp)
+			binding.notificationBackground.visibility= View.GONE
+		},10000)
+
+
 	}
 }

@@ -29,6 +29,7 @@
             app:layout_constraintTop_toBottomOf="@id/title"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="150dp"
+            android:inputType="textEmailAddress"
             />
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/pass"
@@ -41,7 +42,17 @@
             app:layout_constraintTop_toBottomOf="@id/email"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
+            android:inputType="textVisiblePassword"
+            android:maxLength="15"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/max_length"
+            android:fontFamily="@font/montserrat_regular"
+            android:textSize="16sp"
+            app:layout_constraintTop_toBottomOf="@id/pass"
+            app:layout_constraintStart_toStartOf="@id/pass"/>
         <FrameLayout
             android:id="@+id/btn_next"
             android:layout_width="match_parent"

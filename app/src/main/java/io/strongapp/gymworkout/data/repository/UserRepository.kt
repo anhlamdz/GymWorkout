@@ -8,7 +8,7 @@ class UserRepository(private val userDao: UserDao) {
 		return userDao.insert(userEntity)
 	}
 
-	suspend fun getInfo(): UserEntity {
+	fun getInfo(): UserEntity {
 		return userDao.getInfo()
 	}
 }

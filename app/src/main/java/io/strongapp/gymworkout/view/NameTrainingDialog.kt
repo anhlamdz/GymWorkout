@@ -17,6 +17,7 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.compose.animation.core.updateTransition
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -27,6 +28,7 @@ import io.strongapp.gymworkout.ui.exercises.adpter.InstructionsAdapter
 
 class NameTrainingDialog(private val context: Context)  {
 	private var onNameEnteredListener: OnNameEnteredListener? = null
+	private lateinit var countLength :TextView
 	fun show(name : String) {
 		val dialog = Dialog(context)
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -42,10 +44,10 @@ class NameTrainingDialog(private val context: Context)  {
 		val btnCancel = dialog.findViewById<TextView>(R.id.btnCancel)
 		val btnSave = dialog.findViewById<TextView>(R.id.btnSave)
 		val searchEditText = dialog.findViewById<EditText>(R.id.search_edt)
-		val countLength = dialog.findViewById<TextView>(R.id.countLength)
+		countLength = dialog.findViewById(R.id.countLength)
 
 		searchEditText.text = name.toEditable()
-
+		updateCharCount(name.length)
 		dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING or WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
 
 		val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -76,7 +78,7 @@ class NameTrainingDialog(private val context: Context)  {
 
 			override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 				val charCount = p0?.length?:0
-				countLength.text = "$charCount/30"
+				updateCharCount(charCount)
 			}
 
 			override fun afterTextChanged(p0: Editable?) {
@@ -94,4 +96,8 @@ class NameTrainingDialog(private val context: Context)  {
 	fun setOnNameEnteredListener(listener: OnNameEnteredListener) {
 		onNameEnteredListener = listener
 	}
+	fun updateCharCount(charCount: Int) {
+		countLength.text = "$charCount/30"
+	}
+
 }

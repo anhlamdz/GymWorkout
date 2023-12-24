@@ -1,5 +1,6 @@
 package io.strongapp.gymworkout.ui.guide.tab
 
+import android.content.Intent
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import io.strongapp.gymworkout.R
@@ -7,6 +8,7 @@ import io.strongapp.gymworkout.base.BaseFragment
 import io.strongapp.gymworkout.databinding.FragmentGuildGenderBinding
 import io.strongapp.gymworkout.ui.guide.GuideAct
 import io.strongapp.gymworkout.ui.guide.viewmodel.GuideViewModel
+import io.strongapp.gymworkout.ui.login.LoginAct
 
 
 class FragmentGuideGender : BaseFragment<FragmentGuildGenderBinding>() {
@@ -24,6 +26,10 @@ class FragmentGuideGender : BaseFragment<FragmentGuildGenderBinding>() {
 			} else {
 				Toast.makeText(context, "Vui lòng chọn giới tính", Toast.LENGTH_SHORT).show()
 			}
+		}
+		binding.exitsingAcc.setOnClickListener {
+			val intent = Intent(requireContext(), LoginAct::class.java)
+			startActivity(intent)
 		}
 	}
 

@@ -1,22 +1,25 @@
 package io.strongapp.gymworkout.ui.custom.customtraining.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import io.strongapp.gymworkout.R
+import io.strongapp.gymworkout.data.models.CustomRepSetEntity
+import io.strongapp.gymworkout.data.models.ExerciseRepXSetEntity
 import io.strongapp.gymworkout.data.models.actualPracticeEntity
 import io.strongapp.gymworkout.databinding.ItemRepSetBinding
 
-class CustomTrainingRepSepAdapter(
+class CustomTrainingRepSetAdapter(
 	val context: Context,
-	private var list: List<actualPracticeEntity>,
+	private var list: MutableList<CustomRepSetEntity>,
 	private val textView: TextView,
 	private val addSet: ConstraintLayout
-) : RecyclerView.Adapter<CustomTrainingRepSepAdapter.TrainingRepSetViewHolder>() {
-
+) : RecyclerView.Adapter<CustomTrainingRepSetAdapter.TrainingRepSetViewHolder>() {
 	init {
 		textView.text = "${list.size} Hiệp"
 	}
@@ -36,7 +39,7 @@ class CustomTrainingRepSepAdapter(
 	inner class TrainingRepSetViewHolder(private val binding: ItemRepSetBinding) :
 		RecyclerView.ViewHolder(binding.root) {
 
-		fun bind(position: Int, number: actualPracticeEntity) {
+		fun bind(position: Int, number: CustomRepSetEntity) {
 			binding.apply {
 				itemImgCheck.visibility = ViewGroup.INVISIBLE
 				numberRep.text = number.set.toString()
@@ -49,35 +52,42 @@ class CustomTrainingRepSepAdapter(
 				addSet.setOnClickListener {
 					addItem()
 				}
+
 			}
 
 		}
 	}
 
-	fun updateList(newList: List<actualPracticeEntity>) {
+
+	fun updateList(newList: MutableList<CustomRepSetEntity>) {
 		list = newList
 		textView.text = "${newList.size} Hiệp"
 		notifyDataSetChanged()
 	}
 
 	private fun deleteItem(position: Int) {
-		list = list.toMutableList().apply {
-			removeAt(position)
+		if (list.size > 1){
+			list = list.apply {
+				removeAt(position)
+			}
+			updateList(list)
+			updateItemNumbers()
 		}
-		updateList(list)
-		// Cập nhật lại số thứ tự của các mục còn lại
-		updateItemNumbers()
+		else{
+			Toast.makeText(context,"Bạn phải để ít nhất 1 hiệp",Toast.LENGTH_SHORT).show()
+		}
 	}
 
 	private fun addItem() {
-		val newList = list.toMutableList().apply {
-			add(actualPracticeEntity(size + 1, false, R.drawable.ic_lang_not_checked, size + 1))
+		val newList = list.apply {
+			add(CustomRepSetEntity(size + 1, false, R.drawable.ic_lang_not_checked, size + 1))
 		}
 		updateList(newList)
 		updateItemNumbers()
+
+
 	}
 
-	// Cập nhật lại số thứ tự của các mục sau khi xóa
 	private fun updateItemNumbers() {
 		for (i in list.indices) {
 			list[i].set = i + 1
@@ -85,5 +95,7 @@ class CustomTrainingRepSepAdapter(
 		notifyDataSetChanged()
 	}
 
-
+	fun getList() : List<CustomRepSetEntity> {
+		return list
+	}
 }

@@ -13,5 +13,5 @@ data class WorkoutEntity (
 	@ColumnInfo("weight") val weight : Int,
 	@ColumnInfo("time") val time : String,
 	@ColumnInfo("date") val date : String,
-	@ColumnInfo("userid") val userId : Long
+	@ColumnInfo("userid") val userId : String
 )

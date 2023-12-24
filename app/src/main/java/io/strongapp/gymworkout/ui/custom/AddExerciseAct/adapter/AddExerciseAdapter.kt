@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import io.strongapp.gymworkout.R
 import io.strongapp.gymworkout.data.database.ExerciseResponse
+import io.strongapp.gymworkout.data.models.actualPracticeEntity
 import io.strongapp.gymworkout.databinding.ItemExerciseBinding
 import io.strongapp.gymworkout.view.ExerciseDetailDialog
 
@@ -87,6 +88,7 @@ class AddExerciseAdapter(
 			}
 		}
 	}
+
 
 
 	private fun handleItemClick(exerciseResponse: ExerciseResponse, itemImgCheck: ImageView) {

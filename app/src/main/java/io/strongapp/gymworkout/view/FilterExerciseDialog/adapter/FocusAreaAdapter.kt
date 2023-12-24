@@ -55,11 +55,18 @@ class FocusAreaAdapter(
 		return list.filter { it.isChecked }
 	}
 
-
-
-
 	interface OnItemSelectedListener {
 		fun onItemSelected()
 		fun onItemDeselected()
 	}
+	fun setSelectedItemsFromPreferences(selectedItems: List<String>) {
+		list.forEach { it.isChecked = selectedItems.contains(it.name) }
+		notifyDataSetChanged()
+	}
+	fun clearItem(): List<FocusAreaEntity> {
+		list.forEach { it.isChecked = false }
+		notifyDataSetChanged()
+		return list
+	}
+
 }

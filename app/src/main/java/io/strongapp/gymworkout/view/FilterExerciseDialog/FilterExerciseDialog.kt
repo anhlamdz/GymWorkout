@@ -39,6 +39,10 @@ class FilterExerciseDialog(
 	private lateinit var title: TextView
 	private var filteredList: List<ExerciseResponse> = emptyList()
 	private var filterAppliedListener: OnFilterAppliedListener? = null
+	private val preferences: SharedPreferences =
+		context.getSharedPreferences("filter_preferences", Context.MODE_PRIVATE)
+
+
 
 	fun show(exerciseList: List<ExerciseResponse>) {
 
@@ -79,15 +83,18 @@ class FilterExerciseDialog(
 		}
 
 
-
+		restoreSelectedItemsFromPreferences()
 
 		val selectedFocusAreas = focusAreaAdapter.getSelectedItems()
 		val selectedEquipment = equipmentAdapter.getSelectedItems()
 		applyFilters(selectedFocusAreas, selectedEquipment)
 
 		btnSave.setOnClickListener {
+			saveSelectedItemsToPreferences(
+				focusAreaAdapter.getSelectedItems(),
+				equipmentAdapter.getSelectedItems()
+			)
 
-			// Save the filtered list
 			filteredList = applyFilters(
 				focusAreaAdapter.getSelectedItems(),
 				equipmentAdapter.getSelectedItems()
@@ -101,9 +108,10 @@ class FilterExerciseDialog(
 		}
 
 		btnClear.setOnClickListener {
-			// Apply filters to update the exercise count
+			focusAreaAdapter.clearItem()
+			equipmentAdapter.clearItem()
 			applyFilters(focusAreaAdapter.getSelectedItems(), equipmentAdapter.getSelectedItems())
-
+			clearSharedPreferences()
 
 		}
 
@@ -182,4 +190,35 @@ class FilterExerciseDialog(
 	interface OnFilterAppliedListener {
 		fun onFilterApplied(filteredList: List<ExerciseResponse>)
 	}
+	private fun restoreSelectedItemsFromPreferences() {
+		val selectedFocusAreas =
+			preferences.getStringSet("selected_focus_areas", HashSet()) ?: HashSet()
+		val selectedEquipment =
+			preferences.getStringSet("selected_equipment", HashSet()) ?: HashSet()
+
+		focusAreaAdapter.setSelectedItemsFromPreferences(selectedFocusAreas.toList())
+		equipmentAdapter.setSelectedItemsFromPreferences(selectedEquipment.toList())
+	}
+
+	private fun saveSelectedItemsToPreferences(
+		selectedFocusAreas: List<FocusAreaEntity>,
+		selectedEquipment: List<EquipmentEntity>
+	) {
+		val editor = preferences.edit()
+		val focusAreaSet = HashSet<String>()
+		selectedFocusAreas.forEach { focusAreaSet.add(it.name) }
+		editor.putStringSet("selected_focus_areas", focusAreaSet)
+		val equipmentSet = HashSet<String>()
+		selectedEquipment.forEach { equipmentSet.add(it.name) }
+		editor.putStringSet("selected_equipment", equipmentSet)
+		editor.putBoolean("filter_applied", true)
+
+		editor.apply()
+	}
+	private fun clearSharedPreferences() {
+		val editor = preferences.edit()
+		editor.clear()
+		editor.apply()
+	}
+
 }

@@ -1,6 +1,8 @@
 package io.strongapp.gymworkout.ui.exercises
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -50,7 +52,7 @@ class ExercisesFr : BaseFragment<FragmentExercisesBinding>() , FilterExerciseDia
     override fun onFilterApplied(filteredList: List<ExerciseResponse>) {
         exercisesAdapter.submitList(filteredList)
         binding.numberEx.text = filteredList.size.toString()
-        binding.btnClear.visibility = if (filteredList.isNotEmpty()) View.VISIBLE else View.GONE
+        binding.btnClear.visibility = if (filteredList.size!=1300) View.VISIBLE else View.GONE
     }
     override fun initAction() {
         val slideUpAnimation = AnimationUtils.loadAnimation(context, R.anim.anim_slide_up)
@@ -80,6 +82,7 @@ class ExercisesFr : BaseFragment<FragmentExercisesBinding>() , FilterExerciseDia
             binding.btnClear.visibility =  View.GONE
             binding.numberEx.text = exerciseResponse.size.toString()
             Glide.get(requireContext()).clearMemory()
+            clearSharedPreferences()
         }
 
     }
@@ -143,6 +146,13 @@ class ExercisesFr : BaseFragment<FragmentExercisesBinding>() , FilterExerciseDia
 
     private fun hideKeyboard() {
         inputMethodManager.hideSoftInputFromWindow(edtSearch.windowToken, 0)
+    }
+    private fun clearSharedPreferences() {
+        val preferences: SharedPreferences =
+            requireContext().getSharedPreferences("filter_preferences", MODE_PRIVATE)
+        val editor = preferences.edit()
+        editor.clear()
+        editor.apply()
     }
 
 

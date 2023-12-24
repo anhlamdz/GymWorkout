@@ -54,6 +54,15 @@ class EquipmentAdapter(
 		fun onItemSelected()
 		fun onItemDeselected()
 	}
+	fun setSelectedItemsFromPreferences(selectedItems: List<String>) {
+		list.forEach { it.isChecked = selectedItems.contains(it.name) }
+		notifyDataSetChanged()
+	}
+	fun clearItem(): List<EquipmentEntity> {
+		list.forEach { it.isChecked = false }
+		notifyDataSetChanged()
+		return list
+	}
 }
 
 

@@ -28,7 +28,7 @@
             android:drawableRight="@drawable/baseline_edit_24"
             android:drawablePadding="2dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="New Training 1  "
+            android:text="New Training"
             android:textColor="@color/white"
             android:textSize="16sp"
             app:layout_constraintStart_toEndOf="@id/btn_back"

@@ -42,9 +42,6 @@ class StartTrainingAdapter : ListAdapter<ExerciseRepXSetEntity, StartTrainingAda
 	override fun onBindViewHolder(holder: ExercisesViewHolder, position: Int) {
 		holder.bind(getItem(position))
 
-		holder.itemView.setOnClickListener {
-
-		}
 	}
 
 	inner class ExercisesViewHolder(private val binding: ItemStartTrainingBinding) : RecyclerView.ViewHolder(binding.root) {
